@@ -17,11 +17,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
-      NSUserDefaults.standardUserDefaults().removeObjectForKey("username")
-    NSUserDefaults.standardUserDefaults().removeObjectForKey("password")
-//        NSUserDefaults.standardUserDefaults().setObject("zxzx", forKey: "username")
-//        NSUserDefaults.standardUserDefaults().setObject("zxzx", forKey: "password")
-        
         let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let user = NSUserDefaults.standardUserDefaults().objectForKey("username")
         
