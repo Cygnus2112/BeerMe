@@ -223,8 +223,10 @@ class BeerSwipeController: UIViewController, MDCSwipeToChooseDelegate {
     }
     func frontCardViewFrame() -> CGRect{
         let horizontalPadding:CGFloat = 20.0
-        let topPadding:CGFloat = 60.0
-        let bottomPadding:CGFloat = 200.0
+        //let topPadding:CGFloat = 60.0
+        let topPadding:CGFloat = 80.0
+        // let bottomPadding:CGFloat = 200.0
+        let bottomPadding:CGFloat = 300.0
         return CGRectMake(horizontalPadding,topPadding,CGRectGetWidth(self.view.frame) - (horizontalPadding * 2), CGRectGetHeight(self.view.frame) - bottomPadding)
     }
     func backCardViewFrame() ->CGRect{

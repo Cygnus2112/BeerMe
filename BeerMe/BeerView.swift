@@ -20,6 +20,12 @@ class ChooseBeerView: MDCSwipeToChooseView {
     init(frame: CGRect, beer: Beer, options: MDCSwipeToChooseViewOptions) {
         
         super.init(frame: frame, options: options)
+        
+        print("CGRectGetWidth(self.bounds)")
+        print(CGRectGetWidth(self.bounds))
+        print("CGRectGetHeight(self.bounds)")
+        print(CGRectGetHeight(self.bounds))
+        
         self.beer = beer
         
         if let image = self.beer.Label {
@@ -28,6 +34,8 @@ class ChooseBeerView: MDCSwipeToChooseView {
         
         self.autoresizingMask = [UIViewAutoresizing.FlexibleHeight, UIViewAutoresizing.FlexibleWidth]
         UIViewAutoresizing.FlexibleBottomMargin
+        
+        self.imageView.contentMode = .ScaleAspectFit
         
         self.imageView.autoresizingMask = self.autoresizingMask
         constructInformationView()
@@ -40,7 +48,7 @@ class ChooseBeerView: MDCSwipeToChooseView {
     func constructInformationView() -> Void{
         let bottomHeight:CGFloat = 60.0
         let bottomFrame:CGRect = CGRectMake(0,
-                                            CGRectGetHeight(self.bounds) - bottomHeight,
+                                            (CGRectGetHeight(self.bounds) - bottomHeight),
                                             CGRectGetWidth(self.bounds),
                                             bottomHeight);
         self.informationView = UIView(frame:bottomFrame)
@@ -55,8 +63,8 @@ class ChooseBeerView: MDCSwipeToChooseView {
         let leftPadding:CGFloat = 12.0
         let topPadding:CGFloat = 17.0
         let frame:CGRect = CGRectMake(leftPadding,
-                                      topPadding,
-                                      floor(CGRectGetWidth(self.informationView.frame)/2),
+                                      topPadding,floor(CGRectGetWidth(self.informationView.frame)/2),
+
                                       CGRectGetHeight(self.informationView.frame) - topPadding)
         self.nameLabel = UILabel(frame:frame)
         self.nameLabel.font = UIFont(name: "Avenir Next Condensed", size:25)
@@ -64,15 +72,16 @@ class ChooseBeerView: MDCSwipeToChooseView {
         self.informationView .addSubview(self.nameLabel)
     }
     
-    func buildImageLabelViewLeftOf(x:CGFloat, image:UIImage) -> ImagelabelView{
-        let frame:CGRect = CGRect(x:x-ChooseBeerViewImageLabelWidth, y: 0,
-                                  width: ChooseBeerViewImageLabelWidth,
-                                  height: CGRectGetHeight(self.informationView.bounds))
-        
-        let view:ImagelabelView = ImagelabelView(frame:frame, image:image, text:beer.Name as String)
-        
-        
-        view.autoresizingMask = UIViewAutoresizing.FlexibleLeftMargin
-        return view
-    }
+//    func buildImageLabelViewLeftOf(x:CGFloat, image:UIImage) -> ImagelabelView{
+//                                                                    // y: 0
+//        let frame:CGRect = CGRect(x:x-ChooseBeerViewImageLabelWidth, y: 0,
+//                                  width: ChooseBeerViewImageLabelWidth,
+//                                  height: CGRectGetHeight(self.informationView.bounds))
+//        
+//        let view:ImagelabelView = ImagelabelView(frame:frame, image:image, text:beer.Name as String)
+//        
+//        
+//        view.autoresizingMask = UIViewAutoresizing.FlexibleLeftMargin
+//        return view
+//    }
 }

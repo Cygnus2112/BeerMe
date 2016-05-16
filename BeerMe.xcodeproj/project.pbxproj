@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		78D463804F86BFEDA1557F43 /* Pods_BeerMe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9417D0EA98824A34AA24C38F /* Pods_BeerMe.framework */; };
 		C20EF63E1CDC1243005E7DB6 /* BeerStylesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20EF63D1CDC1242005E7DB6 /* BeerStylesController.swift */; };
-		C2192DB81CE00C430011A448 /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2192DB71CE00C430011A448 /* LoginService.swift */; };
 		C22252A51CE6134000677F32 /* EmptyWishlistController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C22252A41CE6133F00677F32 /* EmptyWishlistController.swift */; };
 		C235CAA11CE237260037CADB /* AvenirNextCondensed-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C235CAA01CE237260037CADB /* AvenirNextCondensed-Regular.ttf */; };
 		C29DF9641CD59F8300E90770 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C29DF9631CD59F8300E90770 /* AppDelegate.swift */; };
@@ -26,7 +25,6 @@
 		C2A194271CD9270100B69249 /* BeerSwipeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2A194261CD9270100B69249 /* BeerSwipeController.swift */; };
 		C2ED08FD1CE0395B0040B1B5 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2ED08FC1CE0395B0040B1B5 /* UserModel.swift */; };
 		C2ED08FF1CE12C170040B1B5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C2ED08FE1CE12C170040B1B5 /* LaunchScreen.storyboard */; };
-		C2EEF60B1CE76FF0001A34B5 /* BeerMe.app in Resources */ = {isa = PBXBuildFile; fileRef = C29DF9601CD59F8300E90770 /* BeerMe.app */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,7 +32,6 @@
 		9417D0EA98824A34AA24C38F /* Pods_BeerMe.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BeerMe.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A8B1F124F61CECD8BFC59C3B /* Pods-BeerMe.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeerMe.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BeerMe/Pods-BeerMe.debug.xcconfig"; sourceTree = "<group>"; };
 		C20EF63D1CDC1242005E7DB6 /* BeerStylesController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeerStylesController.swift; sourceTree = "<group>"; };
-		C2192DB71CE00C430011A448 /* LoginService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginService.swift; sourceTree = "<group>"; };
 		C22252A41CE6133F00677F32 /* EmptyWishlistController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptyWishlistController.swift; sourceTree = "<group>"; };
 		C235CAA01CE237260037CADB /* AvenirNextCondensed-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "AvenirNextCondensed-Regular.ttf"; sourceTree = "<group>"; };
 		C29DF9601CD59F8300E90770 /* BeerMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BeerMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -118,7 +115,6 @@
 				C29DF96A1CD59F8300E90770 /* Assets.xcassets */,
 				C29DF96F1CD59F8300E90770 /* Info.plist */,
 				C2A194111CD83D0000B69249 /* BeerMe-Bridging-Header.h */,
-				C2192DB71CE00C430011A448 /* LoginService.swift */,
 			);
 			path = BeerMe;
 			sourceTree = "<group>";
@@ -219,7 +215,6 @@
 			files = (
 				C2ED08FF1CE12C170040B1B5 /* LaunchScreen.storyboard in Resources */,
 				C235CAA11CE237260037CADB /* AvenirNextCondensed-Regular.ttf in Resources */,
-				C2EEF60B1CE76FF0001A34B5 /* BeerMe.app in Resources */,
 				C29DF96B1CD59F8300E90770 /* Assets.xcassets in Resources */,
 				C29DF9691CD59F8300E90770 /* Main.storyboard in Resources */,
 			);
@@ -280,7 +275,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C2192DB81CE00C430011A448 /* LoginService.swift in Sources */,
 				C2A194021CD7106E00B69249 /* SignupViewController.swift in Sources */,
 				C2A1941D1CD91CA900B69249 /* BeerModel.swift in Sources */,
 				C20EF63E1CDC1243005E7DB6 /* BeerStylesController.swift in Sources */,

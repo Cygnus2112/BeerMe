@@ -18,6 +18,8 @@ class FavoritesViewController : UITableViewController {
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print("wishList.count")
+        print(wishList.count)
         return wishList.count
     }
     
@@ -26,6 +28,8 @@ class FavoritesViewController : UITableViewController {
         
         let beer = wishList[indexPath.row]
         cell.textLabel?.text = beer.Name as String
+        
+        cell.textLabel?.font = UIFont(name: "Avenir Next Condensed", size: 20)
         
         return cell
     }

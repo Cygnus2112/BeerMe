@@ -116,7 +116,7 @@ router.get('/fetchbeers', function(req,res){
 									foundBeers++;
 									beersFetched[beer.id] = {
 										"name": beer.name,
-										"label": beer.labels.large,
+										"label": beer.labels.medium,
 										"style": beer.style.name
 									}
 								}
