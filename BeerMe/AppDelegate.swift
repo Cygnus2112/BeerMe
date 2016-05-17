@@ -20,9 +20,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let user = NSUserDefaults.standardUserDefaults().objectForKey("username")
         
-     //   print(UIFont.familyNames())
-        print(user)
-        
         if user != nil {
             let initViewController: UIViewController = storyboard.instantiateViewControllerWithIdentifier("StylesNavController") as UIViewController
             self.window?.rootViewController = initViewController

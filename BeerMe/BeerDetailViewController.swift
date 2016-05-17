@@ -110,43 +110,35 @@ class BeerDetailViewController : UIViewController, UINavigationControllerDelegat
     override func viewWillDisappear(animated: Bool){
         super.viewWillDisappear(animated)
         
-       if self.wishListToRemove.isEmpty == false {
+        if self.wishListToRemove.isEmpty == false {
         
-        let parameters = [
-            "username": self.username,
-            "wishlist": self.wishListToRemove as AnyObject,
-            "dislikes": self.dislikesToAdd as AnyObject
-        ]
+            let parameters = [
+                "username": self.username,
+                "wishlist": self.wishListToRemove as AnyObject,
+                "dislikes": self.dislikesToAdd as AnyObject
+            ]
         
-        let headers = ["x-access-token" : String(NSUserDefaults.standardUserDefaults().objectForKey("token")!)]
+            let headers = ["x-access-token" : String(NSUserDefaults.standardUserDefaults().objectForKey("token")!)]
         
-        let queue = dispatch_queue_create("com.tomleupp.manager-response-queue", DISPATCH_QUEUE_CONCURRENT)
+            let queue = dispatch_queue_create("com.tomleupp.manager-response-queue", DISPATCH_QUEUE_CONCURRENT)
         
            //     let request = Alamofire.request(.PUT, "http://localhost:8080/wishlist", parameters: parameters, headers: headers, encoding: .JSON)
-        let request = Alamofire.request(.PUT, "http://beermeserver.yxuemvb8nv.us-west-2.elasticbeanstalk.com/wishlist", parameters: parameters, headers: headers, encoding: .JSON)
+            let request = Alamofire.request(.PUT, "http://beermeserver.yxuemvb8nv.us-west-2.elasticbeanstalk.com/wishlist", parameters: parameters, headers: headers, encoding: .JSON)
         
-        request.response(
-            queue: queue,
-            responseSerializer: Request.JSONResponseSerializer(options: .AllowFragments),
-            completionHandler: { response in
+            request.response(
+                queue: queue,
+                responseSerializer: Request.JSONResponseSerializer(options: .AllowFragments),
+                completionHandler: { response in
                 
-                let json = JSON(response.result.value!)
+                    let json = JSON(response.result.value!)
                 
-                print(json)
+                    print(json)
                 
-                dispatch_async(dispatch_get_main_queue()) {
+                    dispatch_async(dispatch_get_main_queue()) {
+                    }
                 }
-            }
-        )
+            )
+        }
     }
-    }
-
-//    override func willMoveToParentViewController(parent: UIViewController?) {
-//       if parent == nil {
-//            print("parent")
-//            print(self.parentViewController)
-//            print("Back button pressed")
-//       }
-//    }
     
 }

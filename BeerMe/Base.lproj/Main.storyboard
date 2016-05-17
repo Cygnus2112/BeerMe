@@ -253,7 +253,7 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="dSu-bd-GPf">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="sectionIndexBackgroundColor" red="1" green="1" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="Basic" id="oz1-OM-TBQ">
@@ -275,7 +275,9 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Wish List" id="NHq-c7-HeT" userLabel="Wish List">
-                        <barButtonItem key="backBarButtonItem" id="UFD-JO-X2f"/>
+                        <barButtonItem key="backBarButtonItem" id="UFD-JO-X2f">
+                            <color key="tintColor" red="1" green="1" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="ic_search" id="RKh-ag-O2z">
                             <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
@@ -290,7 +292,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XD5-ua-J1L" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-248" y="1247"/>
+            <point key="canvasLocation" x="1274" y="1247"/>
         </scene>
         <!--Empty Wishlist Controller-->
         <scene sceneID="iEC-ha-AM2">
@@ -326,7 +328,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d69-df-2oR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-248" y="2118"/>
+            <point key="canvasLocation" x="1050" y="2246"/>
         </scene>
         <!--Single Favorite-->
         <scene sceneID="aVn-7O-Pyf">
@@ -402,12 +404,13 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8HH-BU-une" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="320" y="1247"/>
+            <point key="canvasLocation" x="1842" y="1247"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="uTm-fp-SYS">
             <objects>
                 <navigationController id="toA-GE-nw8" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="6fh-1H-x9a"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="gFB-gG-ReE">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -425,7 +428,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0dC-JQ-hL4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-724" y="1129"/>
+            <point key="canvasLocation" x="714" y="1233"/>
         </scene>
         <!--Beer Styles Controller-->
         <scene sceneID="UFG-FR-f5v">
@@ -445,7 +448,7 @@
                             <navigationBar contentMode="scaleToFill" id="QFN-sJ-Atp">
                                 <rect key="frame" x="0.0" y="19" width="414" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <color key="barTintColor" red="1" green="1" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="barTintColor" red="0.80000000000000004" green="0.59999999999999998" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <items>
                                     <navigationItem title="Title" id="7pr-SQ-20r"/>
                                 </items>
@@ -501,7 +504,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="ceX-MP-O5H">
                         <barButtonItem key="rightBarButtonItem" image="ic_favorite" id="vmX-O4-Pz5">
-                            <color key="tintColor" red="1" green="1" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <action selector="loadWishList:" destination="DnG-fW-A9N" id="0DH-fX-SNS"/>
                             </connections>
@@ -509,8 +512,8 @@
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                     <connections>
-                        <segue destination="toA-GE-nw8" kind="modal" identifier="StylesToWishlistSegue" id="Eny-V9-Gwy"/>
                         <segue destination="pkZ-0e-ybI" kind="push" identifier="BeerSwipeSegue" id="kkw-cK-7h2"/>
+                        <segue destination="toA-GE-nw8" kind="modal" identifier="StylesToWishlistSegue" id="iei-Cn-ZRC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="F1g-j8-FTk" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -527,12 +530,20 @@
                         <color key="backgroundColor" red="1" green="1" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <navigationItem key="navigationItem" id="a3O-zJ-oiJ">
-                        <barButtonItem key="backBarButtonItem" image="ic_arrow_back" id="ZDb-UL-Rx1"/>
+                        <barButtonItem key="backBarButtonItem" image="ic_arrow_back" id="ZDb-UL-Rx1">
+                            <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="ic_favorite" id="aCZ-bZ-H7R">
-                            <color key="tintColor" red="1" green="1" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="loadWishList:" destination="pkZ-0e-ybI" id="s9i-0p-pWX"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
+                    <connections>
+                        <segue destination="toA-GE-nw8" kind="modal" identifier="SwipeToWishListSegue" id="pPt-PT-nE8"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lw6-Uc-gJg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -543,6 +554,7 @@
             <objects>
                 <navigationController storyboardIdentifier="ProfileNavController" automaticallyAdjustsScrollViewInsets="NO" id="ykt-9J-1hy" sceneMemberID="viewController">
                     <toolbarItems/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="4sM-Yx-reb">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -566,10 +578,11 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" backIndicatorImage="ic_arrow_back" id="rtd-8P-xOu">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="barTintColor" red="0.80000000000000004" green="0.59999999999999998" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                         <textAttributes key="titleTextAttributes">
                             <fontDescription key="fontDescription" name="AvenirNextCondensed-Regular" family="Avenir Next Condensed" pointSize="25"/>
-                            <color key="textColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -595,8 +608,9 @@
         <image name="pub-1000" width="1000" height="667"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Eny-V9-Gwy"/>
-        <segue reference="iGL-2E-zkl"/>
+        <segue reference="iei-Cn-ZRC"/>
+        <segue reference="TaF-TH-NVq"/>
         <segue reference="ihe-GI-Xxy"/>
     </inferredMetricsTieBreakers>
+    <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
 </document>

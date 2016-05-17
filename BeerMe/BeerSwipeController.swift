@@ -18,6 +18,7 @@ import SwiftyJSON
 class BeerSwipeController: UIViewController, MDCSwipeToChooseDelegate {
     var style = ""
     var beers:[Beer] = []
+    var wishList: [Beer] = []
     var wishListToAdd : [AnyObject] = []
     var dislikesToAdd : [AnyObject] = []
     
@@ -46,8 +47,6 @@ class BeerSwipeController: UIViewController, MDCSwipeToChooseDelegate {
     
     override func viewDidLoad(){
         super.viewDidLoad()
-        
-        print(style)
        
         self.setMyFrontCardView(self.popPersonViewWithFrame(frontCardViewFrame())!)
         self.view.addSubview(self.frontCardView)
@@ -126,6 +125,8 @@ class BeerSwipeController: UIViewController, MDCSwipeToChooseDelegate {
             beerToAdd["style"] = self.currentBeer.Style as String
             
             self.wishListToAdd.append(beerToAdd)
+            
+            showAdded()
             
             print("You liked: \(self.currentBeer.Name)")
             
@@ -260,4 +261,112 @@ class BeerSwipeController: UIViewController, MDCSwipeToChooseDelegate {
     func likeFrontCardView() -> Void{
         self.frontCardView.mdc_swipe(MDCSwipeDirection.Right)
     }
+    
+    var addedLabel:UILabel!
+    func showAdded() {
+        addedLabel = UILabel(frame: CGRectMake(0, 0, 200, 30))
+        addedLabel.center = CGPointMake(210, 650)
+        addedLabel.textAlignment = NSTextAlignment.Center
+        addedLabel.text = "Added to Wish List!"
+        addedLabel.textColor = UIColor.redColor()
+        self.view.addSubview(addedLabel)
+    
+        
+        // set the timer
+        NSTimer.scheduledTimerWithTimeInterval(3.0, target: self, selector: #selector(BeerSwipeController.dismissAdded), userInfo: nil, repeats: false)
+    }
+    
+    func dismissAdded(){
+        // Dismiss the view from here
+        addedLabel.removeFromSuperview()
+    }
+    
+    
+    @IBAction func loadWishList(sender: AnyObject) {
+        
+        
+        let loadingView = UIAlertController(title: nil, message: "Fetching Wish List...", preferredStyle: .Alert)
+        
+        loadingView.view.tintColor = UIColor.blackColor()
+        let loadingIndicator: UIActivityIndicatorView = UIActivityIndicatorView(frame: CGRectMake(10, 5, 50, 50)) as UIActivityIndicatorView
+        loadingIndicator.hidesWhenStopped = true
+        loadingIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
+        loadingIndicator.startAnimating();
+        
+        loadingView.view.addSubview(loadingIndicator)
+        presentViewController(loadingView, animated: true, completion: nil)
+        
+        
+        
+        
+        let username = NSUserDefaults.standardUserDefaults().objectForKey("username")!
+        let parameters = ["username": username]
+        let headers = ["x-access-token" : String(NSUserDefaults.standardUserDefaults().objectForKey("token")!)]
+        let queue = dispatch_queue_create("com.tomleupp.manager-response-queue", DISPATCH_QUEUE_CONCURRENT)
+        
+        //let request = Alamofire.request(.GET, "http://localhost:8080/wishlist", parameters: parameters, headers: headers)
+        
+        let request = Alamofire.request(.GET, "http://beermeserver.yxuemvb8nv.us-west-2.elasticbeanstalk.com/wishlist", parameters: parameters, headers: headers)
+        
+        request.response(
+            queue: queue,
+            responseSerializer: Request.JSONResponseSerializer(options: .AllowFragments),
+            completionHandler: { response in
+                
+                guard let resp = response.result.value else {
+                    print("No wishlist!")
+                    self.performSegueWithIdentifier("SwipeToWishListSegue", sender: nil)
+                    return
+                }
+                
+                let json = JSON(resp)
+                
+                for (key,subJson):(String, JSON) in json {
+                    var label : UIImage!
+                    let labelUrl = String(json[key]["label"])
+                    let queue2 = dispatch_queue_create("com.tomleupp.manager-response-queue", DISPATCH_QUEUE_CONCURRENT)
+                    
+                    let request2 = Alamofire.request(.GET, labelUrl)
+                    
+                    request2.response(
+                        queue: queue2,
+                        responseSerializer: Request.imageResponseSerializer(),
+                        completionHandler: { response in
+                            label = response.result.value!
+                            
+                            let beer = Beer(name: String(json[key]["name"]), labelUrl: labelUrl, label: label, id: key, style: String(json[key]["style"]))
+                            
+                            self.wishList.append(beer)
+                            
+                            dispatch_async(dispatch_get_main_queue()) {
+                                if self.wishList.count == json.count {
+                                    
+                                    self.dismissViewControllerAnimated(false){
+                                        self.performSegueWithIdentifier("SwipeToWishListSegue", sender: nil)
+                                    }
+                                    
+                                    
+                                }
+                            }
+                        }
+                    )
+                }
+                dispatch_async(dispatch_get_main_queue()) {
+                    
+                }
+            }
+        )
+    }
+
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if (segue.identifier == "SwipeToWishListSegue") {
+            if let nav = segue.destinationViewController as? UINavigationController {
+                let dest = nav.topViewController as! FavoritesViewController
+                dest.wishList = self.wishList
+            }
+        }
+        
+    }
+    
+    
 }

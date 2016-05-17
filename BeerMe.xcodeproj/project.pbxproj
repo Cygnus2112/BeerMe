@@ -21,7 +21,6 @@
 		C2A194101CD7DB8B00B69249 /* BeerDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2A1940F1CD7DB8B00B69249 /* BeerDetailViewController.swift */; };
 		C2A1941D1CD91CA900B69249 /* BeerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2A1941C1CD91CA900B69249 /* BeerModel.swift */; };
 		C2A194211CD9234700B69249 /* BeerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2A194201CD9234700B69249 /* BeerView.swift */; };
-		C2A194231CD9238500B69249 /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2A194221CD9238500B69249 /* ImageView.swift */; };
 		C2A194271CD9270100B69249 /* BeerSwipeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2A194261CD9270100B69249 /* BeerSwipeController.swift */; };
 		C2ED08FD1CE0395B0040B1B5 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2ED08FC1CE0395B0040B1B5 /* UserModel.swift */; };
 		C2ED08FF1CE12C170040B1B5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C2ED08FE1CE12C170040B1B5 /* LaunchScreen.storyboard */; };
@@ -47,7 +46,6 @@
 		C2A194111CD83D0000B69249 /* BeerMe-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BeerMe-Bridging-Header.h"; sourceTree = "<group>"; };
 		C2A1941C1CD91CA900B69249 /* BeerModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeerModel.swift; sourceTree = "<group>"; };
 		C2A194201CD9234700B69249 /* BeerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeerView.swift; sourceTree = "<group>"; };
-		C2A194221CD9238500B69249 /* ImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
 		C2A194261CD9270100B69249 /* BeerSwipeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeerSwipeController.swift; sourceTree = "<group>"; };
 		C2ED08FC1CE0395B0040B1B5 /* UserModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		C2ED08FE1CE12C170040B1B5 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = ../LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -147,7 +145,6 @@
 			isa = PBXGroup;
 			children = (
 				C2A194201CD9234700B69249 /* BeerView.swift */,
-				C2A194221CD9238500B69249 /* ImageView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -279,7 +276,6 @@
 				C2A1941D1CD91CA900B69249 /* BeerModel.swift in Sources */,
 				C20EF63E1CDC1243005E7DB6 /* BeerStylesController.swift in Sources */,
 				C29DF9661CD59F8300E90770 /* LoginViewController.swift in Sources */,
-				C2A194231CD9238500B69249 /* ImageView.swift in Sources */,
 				C22252A51CE6134000677F32 /* EmptyWishlistController.swift in Sources */,
 				C2A194211CD9234700B69249 /* BeerView.swift in Sources */,
 				C2ED08FD1CE0395B0040B1B5 /* UserModel.swift in Sources */,

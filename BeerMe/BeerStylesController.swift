@@ -14,10 +14,6 @@ import SwiftyJSON
 
 class BeerStylesController: UIViewController {
     
-    @IBAction func backToProfile(sender: UIButton) {
-        self.performSegueWithIdentifier("BackToProfile", sender: nil)
-    }
-    
     // Do the BreweryDB API call on the back-end. When user makes a choice, 
     // send a GET request with username and style choice
     // use username to get likes & dislikes and only send those that
@@ -83,9 +79,10 @@ class BeerStylesController: UIViewController {
                                 dispatch_async(dispatch_get_main_queue()) {
                                     if self.beers.count == json.count {
                                         
-                                        self.dismissViewControllerAnimated(false, completion: nil)
+                                        self.dismissViewControllerAnimated(false){
+                                            self.performSegueWithIdentifier("BeerSwipeSegue", sender: nil)
+                                        }
                                         
-                                        self.performSegueWithIdentifier("BeerSwipeSegue", sender: nil)
                                     }
                                 }
                             }
@@ -101,14 +98,23 @@ class BeerStylesController: UIViewController {
         )
     }
     
-    
-    
     @IBAction func loadWishList(sender: AnyObject) {
         seriouslyLoadWishList()
     }
     
-    
     func seriouslyLoadWishList(){
+        let loadingView = UIAlertController(title: nil, message: "Fetching Wish List...", preferredStyle: .Alert)
+        
+        loadingView.view.tintColor = UIColor.blackColor()
+        let loadingIndicator: UIActivityIndicatorView = UIActivityIndicatorView(frame: CGRectMake(10, 5, 50, 50)) as UIActivityIndicatorView
+        loadingIndicator.hidesWhenStopped = true
+        loadingIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
+        loadingIndicator.startAnimating();
+        
+        loadingView.view.addSubview(loadingIndicator)
+        presentViewController(loadingView, animated: true, completion: nil)
+        
+ 
         let username = NSUserDefaults.standardUserDefaults().objectForKey("username")!
         let parameters = ["username": username]
         let headers = ["x-access-token" : String(NSUserDefaults.standardUserDefaults().objectForKey("token")!)]
@@ -125,7 +131,7 @@ class BeerStylesController: UIViewController {
                 
                 guard let resp = response.result.value else {
                     print("No wishlist!")
-                    self.performSegueWithIdentifier("FavoritesSegue", sender: nil)
+                    self.performSegueWithIdentifier("StylesToWishlistSegue", sender: nil)
                     return
                 }
                 
@@ -150,14 +156,18 @@ class BeerStylesController: UIViewController {
                             
                             dispatch_async(dispatch_get_main_queue()) {
                                 if self.wishList.count == json.count {
-                                    self.performSegueWithIdentifier("StylesToWishlistSegue", sender: nil)
+                                    
+                                    self.dismissViewControllerAnimated(false){
+                                        self.performSegueWithIdentifier("StylesToWishlistSegue", sender: nil)
+                                    }
+  
                                 }
                             }
                         }
                     )
                 }
                 dispatch_async(dispatch_get_main_queue()) {
-                    print("Am I back on the main thread333: \(NSThread.isMainThread())")
+                    
                 }
             }
         )
@@ -170,8 +180,6 @@ class BeerStylesController: UIViewController {
                 dest.style = self.style
                 dest.beers = self.beers
             }
-        
-        
         }
         if (segue.identifier == "StylesToWishlistSegue") {
             if let nav = segue.destinationViewController as? UINavigationController {

@@ -21,11 +21,6 @@ class ChooseBeerView: MDCSwipeToChooseView {
         
         super.init(frame: frame, options: options)
         
-        print("CGRectGetWidth(self.bounds)")
-        print(CGRectGetWidth(self.bounds))
-        print("CGRectGetHeight(self.bounds)")
-        print(CGRectGetHeight(self.bounds))
-        
         self.beer = beer
         
         if let image = self.beer.Label {
@@ -71,17 +66,5 @@ class ChooseBeerView: MDCSwipeToChooseView {
         self.nameLabel.text = "\(beer.Name)"
         self.informationView .addSubview(self.nameLabel)
     }
-    
-//    func buildImageLabelViewLeftOf(x:CGFloat, image:UIImage) -> ImagelabelView{
-//                                                                    // y: 0
-//        let frame:CGRect = CGRect(x:x-ChooseBeerViewImageLabelWidth, y: 0,
-//                                  width: ChooseBeerViewImageLabelWidth,
-//                                  height: CGRectGetHeight(self.informationView.bounds))
-//        
-//        let view:ImagelabelView = ImagelabelView(frame:frame, image:image, text:beer.Name as String)
-//        
-//        
-//        view.autoresizingMask = UIViewAutoresizing.FlexibleLeftMargin
-//        return view
-//    }
+
 }

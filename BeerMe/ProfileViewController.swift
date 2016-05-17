@@ -13,17 +13,12 @@ import AlamofireImage
 import SwiftyJSON
 import Material
 
+
+// NOTE: This view controller (ProfileViewController) is no longer in use. I'm keeping it around in case I want to implement some version of it later.
+
+
 class ProfileViewController : UIViewController {
     var wishList : [Beer] = []
-    
-    @IBAction func loadWishList2(sender: AnyObject) {
-        seriouslyLoadWishList()
-        
-    }
-    
-    @IBAction func loadWishList(sender: UIButton) {
-        seriouslyLoadWishList()
-    }
     
     func seriouslyLoadWishList(){
         let username = NSUserDefaults.standardUserDefaults().objectForKey("username")!
@@ -90,52 +85,6 @@ class ProfileViewController : UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        //   func toolBar(){
-//        print("toolbar called")
-//        // Title label.
-//        let titleLabel: UILabel = UILabel()
-//        titleLabel.text = "BeerMe!"
-//        titleLabel.textAlignment = .Left
-//        titleLabel.textColor = MaterialColor.white
-//        
-//        // Detail label.
-//        //        let detailLabel: UILabel = UILabel()
-//        //        detailLabel.text = "Build Beautiful Software"
-//        //        detailLabel.textAlignment = .Left
-//        //        detailLabel.textColor = MaterialColor.white
-//        
-//        let menuImage: UIImage? = MaterialIcon.menu
-//        
-//        // Menu button.
-//        let menuButton: FlatButton = FlatButton()
-//        menuButton.pulseColor = MaterialColor.white
-//        //  menuButton.pulseScale = false
-//        menuButton.tintColor = MaterialColor.white
-//        menuButton.setImage(menuImage, forState: .Normal)
-//        menuButton.setImage(menuImage, forState: .Highlighted)
-//        
-//        // Switch control.
-//        let switchControl: MaterialSwitch = MaterialSwitch(state: .Off, style: .LightContent, size: .Small)
-//        
-//        // Search button.
-//        let searchImage = MaterialIcon.search
-//        let searchButton: FlatButton = FlatButton()
-//        searchButton.pulseColor = MaterialColor.white
-//        // searchButton.pulseScale = false
-//        searchButton.tintColor = MaterialColor.white
-//        searchButton.setImage(searchImage, forState: .Normal)
-//        searchButton.setImage(searchImage, forState: .Highlighted)
-//        
-//        let toolbar: Toolbar = Toolbar()
-//        toolbar.statusBarStyle = .LightContent
-//        toolbar.backgroundColor = MaterialColor.blue.base
-//        //  toolbar.titleLabel = titleLabel
-//        // toolbar.detailLabel = detailLabel
-//        toolbar.leftControls = [menuButton]
-//        toolbar.rightControls = [switchControl, searchButton]
-        
-        
-        
     }
     
         
