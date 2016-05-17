@@ -19,6 +19,11 @@ class BeerSwipeController: UIViewController, MDCSwipeToChooseDelegate {
     var style = ""
     var beers:[Beer] = []
     var wishList: [Beer] = []
+    
+    var wishListWorkaround : [AnyObject] = []
+    var wishListBeerArrayWorkaround : [Beer] = []
+    
+    
     var wishListToAdd : [AnyObject] = []
     var dislikesToAdd : [AnyObject] = []
     
@@ -28,10 +33,6 @@ class BeerSwipeController: UIViewController, MDCSwipeToChooseDelegate {
     var frontCardView:ChooseBeerView!
     var backCardView:ChooseBeerView!
     let username = NSUserDefaults.standardUserDefaults().objectForKey("username")!
-    
-    @IBAction func backToStyle(sender: UIButton) {
-        self.performSegueWithIdentifier("BackToStyles", sender: nil)
-    }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -56,6 +57,7 @@ class BeerSwipeController: UIViewController, MDCSwipeToChooseDelegate {
         
         constructNopeButton()
         constructLikedButton()
+        
     }
     
     override func viewWillDisappear(animated: Bool){
@@ -80,11 +82,9 @@ class BeerSwipeController: UIViewController, MDCSwipeToChooseDelegate {
             completionHandler: { response in
                 
                 let json = JSON(response.result.value!)
-                
                 print(json)
                 
                 dispatch_async(dispatch_get_main_queue()) {
-                    
                     
                 }
             }
@@ -117,7 +117,7 @@ class BeerSwipeController: UIViewController, MDCSwipeToChooseDelegate {
             }
             
         } else {
-            var beerToAdd: [String:String] = [:]
+            var beerToAdd: [String:AnyObject] = [:]
             
             beerToAdd["name"] = self.currentBeer.Name as String
             beerToAdd["labelUrl"] = self.currentBeer.LabelUrl as String
@@ -125,6 +125,10 @@ class BeerSwipeController: UIViewController, MDCSwipeToChooseDelegate {
             beerToAdd["style"] = self.currentBeer.Style as String
             
             self.wishListToAdd.append(beerToAdd)
+            
+            beerToAdd["label"] = self.currentBeer.Label as UIImage
+            self.wishListWorkaround.append(beerToAdd)
+            
             
             showAdded()
             
@@ -284,6 +288,17 @@ class BeerSwipeController: UIViewController, MDCSwipeToChooseDelegate {
     
     @IBAction func loadWishList(sender: AnyObject) {
         
+        //temporary workaround for async issue(s)...
+        
+        for beer in self.wishListWorkaround as! [[String: AnyObject]] {
+            let beerObj = Beer(name: beer["name"] as! String, labelUrl: beer["labelUrl"] as! String, label: beer["label"] as! UIImage, id: beer["id"] as! String, style: beer["style"] as! String)
+            
+            self.wishListBeerArrayWorkaround.append(beerObj)
+        }
+        
+
+        // end temporary workaround
+        
         
         let loadingView = UIAlertController(title: nil, message: "Fetching Wish List...", preferredStyle: .Alert)
         
@@ -295,9 +310,6 @@ class BeerSwipeController: UIViewController, MDCSwipeToChooseDelegate {
         
         loadingView.view.addSubview(loadingIndicator)
         presentViewController(loadingView, animated: true, completion: nil)
-        
-        
-        
         
         let username = NSUserDefaults.standardUserDefaults().objectForKey("username")!
         let parameters = ["username": username]
@@ -320,6 +332,15 @@ class BeerSwipeController: UIViewController, MDCSwipeToChooseDelegate {
                 }
                 
                 let json = JSON(resp)
+                
+                //  temporary workaround
+                
+                for beerObj in self.wishListBeerArrayWorkaround{
+                    self.wishList.append(beerObj)
+                }
+                
+                // end temporary workaround
+                
                 
                 for (key,subJson):(String, JSON) in json {
                     var label : UIImage!
@@ -367,6 +388,6 @@ class BeerSwipeController: UIViewController, MDCSwipeToChooseDelegate {
         }
         
     }
-    
-    
+
+
 }

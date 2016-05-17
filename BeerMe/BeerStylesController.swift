@@ -23,6 +23,7 @@ class BeerStylesController: UIViewController {
     var style = ""
     var wishList : [Beer] = []
     
+    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
         

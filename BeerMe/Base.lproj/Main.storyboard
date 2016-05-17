@@ -536,7 +536,7 @@
                         <barButtonItem key="rightBarButtonItem" image="ic_favorite" id="aCZ-bZ-H7R">
                             <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
-                                <action selector="loadWishList:" destination="pkZ-0e-ybI" id="s9i-0p-pWX"/>
+                                <action selector="loadWishList:" destination="pkZ-0e-ybI" id="qQf-bp-JPu"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -608,9 +608,9 @@
         <image name="pub-1000" width="1000" height="667"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="iei-Cn-ZRC"/>
-        <segue reference="TaF-TH-NVq"/>
         <segue reference="ihe-GI-Xxy"/>
+        <segue reference="TaF-TH-NVq"/>
+        <segue reference="pPt-PT-nE8"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
 </document>
