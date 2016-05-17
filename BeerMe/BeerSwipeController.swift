@@ -324,15 +324,6 @@ class BeerSwipeController: UIViewController, MDCSwipeToChooseDelegate {
             queue: queue,
             responseSerializer: Request.JSONResponseSerializer(options: .AllowFragments),
             completionHandler: { response in
-                
-                guard let resp = response.result.value else {
-                    print("No wishlist!")
-                    self.performSegueWithIdentifier("SwipeToWishListSegue", sender: nil)
-                    return
-                }
-                
-                let json = JSON(resp)
-                
                 //  temporary workaround
                 
                 for beerObj in self.wishListBeerArrayWorkaround{
@@ -341,6 +332,22 @@ class BeerSwipeController: UIViewController, MDCSwipeToChooseDelegate {
                 
                 // end temporary workaround
                 
+                guard let resp = response.result.value else {
+                    print("No wishlist!")
+                    self.dismissViewControllerAnimated(false){
+                        self.performSegueWithIdentifier("SwipeToWishListSegue", sender: nil)
+                    }
+                    return
+                }
+              
+                if resp.allKeys.count == 0 {
+                    print("No wishlist!")
+                    self.dismissViewControllerAnimated(false){
+                        self.performSegueWithIdentifier("SwipeToWishListSegue", sender: nil)
+                    }
+                }
+                
+                let json = JSON(resp)
                 
                 for (key,subJson):(String, JSON) in json {
                     var label : UIImage!

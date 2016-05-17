@@ -55,7 +55,7 @@ class LoginViewController: UIViewController {
                         
                         print("login successful")
                         
-                        self.performSegueWithIdentifier("LoginToProfileSegue", sender: nil)
+                        self.performSegueWithIdentifier("LoginToStylesSegue", sender: nil)
                     }
                 }
             )

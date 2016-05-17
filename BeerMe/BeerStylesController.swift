@@ -132,18 +132,37 @@ class BeerStylesController: UIViewController {
                 
                 guard let resp = response.result.value else {
                     print("No wishlist!")
-                    self.performSegueWithIdentifier("StylesToWishlistSegue", sender: nil)
+                    self.dismissViewControllerAnimated(false){
+                        self.performSegueWithIdentifier("StylesToWishlistSegue", sender: nil)
+                    }
                     return
+                }
+                
+                if resp.allKeys.count == 0 {
+                    print("No wishlist!")
+                    self.dismissViewControllerAnimated(false){
+                        self.performSegueWithIdentifier("StylesToWishlistSegue", sender: nil)
+                    }
                 }
                 
                 let json = JSON(resp)
                 
                 for (key,subJson):(String, JSON) in json {
+                    print("key")
+                    print(key)
+                    
                     var label : UIImage!
                     let labelUrl = String(json[key]["label"])
                     let queue2 = dispatch_queue_create("com.tomleupp.manager-response-queue", DISPATCH_QUEUE_CONCURRENT)
                     
                     let request2 = Alamofire.request(.GET, labelUrl)
+                    
+                    print("self.wishList.count")
+                    print(self.wishList.count)
+                    print("json.count")
+                    print(json.count)
+                    
+                    
                     
                     request2.response(
                         queue: queue2,

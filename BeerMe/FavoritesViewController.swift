@@ -18,17 +18,23 @@ class FavoritesViewController : UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if self.wishList.isEmpty {
-            
-            // temporary workaround
-            self.performSegueWithIdentifier("EmptyWishlistSegue", sender: nil)
-        }
+//        if self.wishList.isEmpty {
+//            
+//            // temporary workaround
+//            self.performSegueWithIdentifier("EmptyWishlistSegue", sender: nil)
+//        }
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         self.tableView.reloadData()
         self.tableView.numberOfRowsInSection(0)
+        
+        if self.wishList.isEmpty {
+            
+            // temporary workaround
+            self.performSegueWithIdentifier("EmptyWishlistSegue", sender: nil)
+        }
     }
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -75,6 +81,7 @@ class FavoritesViewController : UITableViewController {
                 
             }
         }
+        
     }
     
     override func didReceiveMemoryWarning() {

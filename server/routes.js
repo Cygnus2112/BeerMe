@@ -33,6 +33,8 @@ router.post('/signup',function(req,res){
 					});
 				});
 			});
+  		} else {
+  			res.json({"ERROR" : "username already taken"})
   		}
 	});
 });
