@@ -27,6 +27,10 @@
             <string>AvenirNextCondensed-Regular</string>
             <string>AvenirNextCondensed-Regular</string>
             <string>AvenirNextCondensed-Regular</string>
+            <string>AvenirNextCondensed-Regular</string>
+            <string>AvenirNextCondensed-Regular</string>
+            <string>AvenirNextCondensed-Regular</string>
+            <string>AvenirNextCondensed-Regular</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -242,10 +246,10 @@
             </objects>
             <point key="canvasLocation" x="593" y="91"/>
         </scene>
-        <!--Wish List-->
+        <!--Wish List View Controller-->
         <scene sceneID="Ufg-N6-kKf">
             <objects>
-                <tableViewController id="u56-6q-AGF" customClass="FavoritesViewController" customModule="BeerMe" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="Wish List View Controller" id="u56-6q-AGF" customClass="FavoritesViewController" customModule="BeerMe" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="dSu-bd-GPf">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -327,20 +331,56 @@
         <!--Single Favorite-->
         <scene sceneID="aVn-7O-Pyf">
             <objects>
-                <viewController id="Kai-Go-kto" userLabel="Single Favorite" customClass="SingleFavoriteController" customModule="BeerMe" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Kai-Go-kto" userLabel="Single Favorite" customClass="BeerDetailViewController" customModule="BeerMe" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="lK2-Xh-K3V">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TBD" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="hyt-HL-PMp">
-                                <rect key="frame" x="32" y="189" width="351" height="148"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="dYX-nB-x8R">
+                                <rect key="frame" x="20" y="92" width="374" height="374"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="121"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="EGV-lP-VRw">
+                                <rect key="frame" x="34" y="486" width="346" height="48"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="AvenirNextCondensed-Regular" family="Avenir Next Condensed" pointSize="25"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="SQM-Vc-R8Y">
+                                <rect key="frame" x="34" y="534" width="360" height="39"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="AvenirNextCondensed-Regular" family="Avenir Next Condensed" pointSize="20"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="LR3-b5-MmB">
+                                <rect key="frame" x="65" y="581" width="100" height="100"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="vUq-MB-D4h">
+                                <rect key="frame" x="250" y="581" width="100" height="100"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="toggleWishList:" destination="Kai-Go-kto" eventType="touchUpInside" id="Yac-Wc-74Y"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Find online" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Sy2-6n-dTv">
+                                <rect key="frame" x="88" y="689" width="55" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="AvenirNextCondensed-Regular" family="Avenir Next Condensed" pointSize="12"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="6Qz-SL-XAe">
+                                <rect key="frame" x="250" y="689" width="101" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="AvenirNextCondensed-Regular" family="Avenir Next Condensed" pointSize="12"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <navigationItem key="navigationItem" id="63f-q1-kT7">
                         <barButtonItem key="rightBarButtonItem" image="ic_search" id="ZJM-uR-cay">
@@ -351,6 +391,14 @@
                         </barButtonItem>
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
+                    <connections>
+                        <outlet property="beerLabel" destination="dYX-nB-x8R" id="knE-fL-aG5"/>
+                        <outlet property="beerNameLabel" destination="EGV-lP-VRw" id="0cu-RO-2Bo"/>
+                        <outlet property="beerStyleLabel" destination="SQM-Vc-R8Y" id="eVy-uw-vb7"/>
+                        <outlet property="shoppingCart" destination="LR3-b5-MmB" id="NAD-gU-qsa"/>
+                        <outlet property="wishListButton" destination="vUq-MB-D4h" id="PYU-uz-r98"/>
+                        <outlet property="wishListLabel" destination="6Qz-SL-XAe" id="53h-vF-Cg6"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8HH-BU-une" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

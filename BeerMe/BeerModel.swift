@@ -30,4 +30,8 @@ class Beer: NSObject {
     }
 }
 
+class BeerArray {
+    var array: [Beer] = []
+}
+
 

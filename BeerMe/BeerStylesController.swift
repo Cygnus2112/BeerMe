@@ -51,7 +51,7 @@ class BeerStylesController: UIViewController {
         
         let queue = dispatch_queue_create("com.tomleupp.manager-response-queue", DISPATCH_QUEUE_CONCURRENT)
         
-//        let request = Alamofire.request(.GET, "http://localhost:8080/fetchbeers", parameters: parameters)
+       // let request = Alamofire.request(.GET, "http://localhost:8080/fetchbeers", parameters: parameters)
         
         let request = Alamofire.request(.GET, "http://beermeserver.yxuemvb8nv.us-west-2.elasticbeanstalk.com/fetchbeers", parameters: parameters)
         
@@ -114,7 +114,7 @@ class BeerStylesController: UIViewController {
         let headers = ["x-access-token" : String(NSUserDefaults.standardUserDefaults().objectForKey("token")!)]
         let queue = dispatch_queue_create("com.tomleupp.manager-response-queue", DISPATCH_QUEUE_CONCURRENT)
         
-        //        let request = Alamofire.request(.GET, "http://localhost:8080/wishlist", parameters: parameters, headers: headers)
+        //let request = Alamofire.request(.GET, "http://localhost:8080/wishlist", parameters: parameters, headers: headers)
         
         let request = Alamofire.request(.GET, "http://beermeserver.yxuemvb8nv.us-west-2.elasticbeanstalk.com/wishlist", parameters: parameters, headers: headers)
         

@@ -11,19 +11,37 @@ import UIKit
 import Alamofire
 
 class FavoritesViewController : UITableViewController {
-    var wishList : [Beer] = []
+//    var wishList : [Beer] = []
+    
+    var wishList = BeerArray().array
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        if self.wishList.isEmpty {
+            
+            // temporary workaround
+            self.performSegueWithIdentifier("EmptyWishlistSegue", sender: nil)
+        }
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        self.tableView.reloadData()
+        self.tableView.numberOfRowsInSection(0)
+    }
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("wishList.count")
-        print(wishList.count)
+        
         return wishList.count
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
         let cell = tableView.dequeueReusableCellWithIdentifier("Basic")!
         
         let beer = wishList[indexPath.row]
@@ -39,34 +57,25 @@ class FavoritesViewController : UITableViewController {
             let beer = wishList[tableView.indexPathForSelectedRow!.row]
             let name = beer.Name
             let label = beer.Label
+            let labelUrl = beer.LabelUrl
             let style = beer.Style
+            let id = beer.Id
             
             
-            if let dest = segue.destinationViewController as? SingleFavoriteController {
-                dest.title = name as String
+            if let dest = segue.destinationViewController as? BeerDetailViewController {
+                dest.beerName = name as String
                 dest.label = label
+                dest.labelUrl = labelUrl as String
+                dest.id = id as String
                 dest.style = style as String
+                dest.presentingSegue = "FavoriteSegue"
+                
+                dest.currentBeer = beer
+                dest.wishList = self.wishList
                 
             }
         }
     }
-   
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        if self.wishList.isEmpty {
-//            let backgroundImage = UIImage(named:"beer-pint-350")
-//            let imageView = UIImageView(image: backgroundImage)
-//            self.tableView.backgroundView = imageView
-            
-            // temporary workaround
-            self.performSegueWithIdentifier("EmptyWishlistSegue", sender: nil)
-            
-        }
-        
-       
-    }
- 
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

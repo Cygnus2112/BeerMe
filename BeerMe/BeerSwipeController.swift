@@ -72,7 +72,7 @@ class BeerSwipeController: UIViewController, MDCSwipeToChooseDelegate {
         
         let queue = dispatch_queue_create("com.tomleupp.manager-response-queue", DISPATCH_QUEUE_CONCURRENT)
         
-//        let request = Alamofire.request(.POST, "http://localhost:8080/wishlist", parameters: parameters, headers: headers, encoding: .JSON)
+       // let request = Alamofire.request(.POST, "http://localhost:8080/wishlist", parameters: parameters, headers: headers, encoding: .JSON)
         let request = Alamofire.request(.POST, "http://beermeserver.yxuemvb8nv.us-west-2.elasticbeanstalk.com/wishlist", parameters: parameters, headers: headers, encoding: .JSON)
         
         request.response(
@@ -85,7 +85,7 @@ class BeerSwipeController: UIViewController, MDCSwipeToChooseDelegate {
                 print(json)
                 
                 dispatch_async(dispatch_get_main_queue()) {
-                    print("Am I back on the main thread: \(NSThread.isMainThread())")
+                    
                     
                 }
             }
@@ -175,7 +175,7 @@ class BeerSwipeController: UIViewController, MDCSwipeToChooseDelegate {
             
             let queue = dispatch_queue_create("com.tomleupp.manager-response-queue", DISPATCH_QUEUE_CONCURRENT)
             
-//            let request = Alamofire.request(.GET, "http://localhost:8080/fetchbeers", parameters: parameters)
+        //    let request = Alamofire.request(.GET, "http://localhost:8080/fetchbeers", parameters: parameters)
             let request = Alamofire.request(.GET, "http://beermeserver.yxuemvb8nv.us-west-2.elasticbeanstalk.com/fetchbeers", parameters: parameters)
             
             
