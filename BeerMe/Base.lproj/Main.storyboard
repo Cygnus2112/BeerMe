@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="Vx0-cG-GN3">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -7,7 +7,6 @@
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="AvenirNextCondensed-Regular.ttf">
-            <string>AvenirNextCondensed-Regular</string>
             <string>AvenirNextCondensed-Regular</string>
             <string>AvenirNextCondensed-Regular</string>
             <string>AvenirNextCondensed-Regular</string>
@@ -71,7 +70,7 @@
                                 <fontDescription key="fontDescription" name="AvenirNextCondensed-Regular" family="Avenir Next Condensed" pointSize="20"/>
                                 <state key="normal" title="New around here? Sign up!"/>
                                 <connections>
-                                    <segue destination="OM4-BX-fc0" kind="modal" identifier="SignupSegue" id="yU5-o2-C0c"/>
+                                    <segue destination="OM4-BX-fc0" kind="push" identifier="SignupSegue" id="yU5-o2-C0c"/>
                                 </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Username" textAlignment="center" minimumFontSize="17" id="wm3-GJ-ptZ">
@@ -101,7 +100,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="85" y="303"/>
+            <point key="canvasLocation" x="711" y="303"/>
         </scene>
         <!--Signup View Controller-->
         <scene sceneID="Cek-jz-3Q9">
@@ -156,19 +155,10 @@
                                 <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="DHW-nV-ngO">
-                                <rect key="frame" x="20" y="20" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="AvenirNextCondensed-Regular" family="Avenir Next Condensed" pointSize="17"/>
-                                <state key="normal" title="Back"/>
-                                <connections>
-                                    <action selector="backButton:" destination="OM4-BX-fc0" eventType="touchUpInside" id="sQf-jf-5mJ"/>
-                                    <segue destination="BYZ-38-t0r" kind="modal" identifier="BackToLogin" id="Enf-1L-ztt"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" id="Kjk-kf-Aqn"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                     <connections>
                         <outlet property="email" destination="YJe-3u-wI8" id="794-CE-9iH"/>
@@ -180,7 +170,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QeL-kz-0rH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="623" y="303"/>
+            <point key="canvasLocation" x="1249" y="303"/>
         </scene>
         <!--Profile View Controller (inactive)-->
         <scene sceneID="cSr-cV-eXW">
@@ -363,16 +353,16 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Find online" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Sy2-6n-dTv">
-                                <rect key="frame" x="88" y="689" width="55" height="21"/>
+                                <rect key="frame" x="79" y="689" width="72" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="AvenirNextCondensed-Regular" family="Avenir Next Condensed" pointSize="12"/>
+                                <fontDescription key="fontDescription" name="AvenirNextCondensed-Regular" family="Avenir Next Condensed" pointSize="14"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="6Qz-SL-XAe">
-                                <rect key="frame" x="250" y="689" width="101" height="21"/>
+                                <rect key="frame" x="235" y="689" width="130" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="AvenirNextCondensed-Regular" family="Avenir Next Condensed" pointSize="12"/>
+                                <fontDescription key="fontDescription" name="AvenirNextCondensed-Regular" family="Avenir Next Condensed" pointSize="14"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -513,7 +503,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="F1g-j8-FTk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1743" y="303"/>
+            <point key="canvasLocation" x="2369" y="303"/>
         </scene>
         <!--Beer Swipe Controller-->
         <scene sceneID="uUO-L3-nsn">
@@ -542,7 +532,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lw6-Uc-gJg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2283" y="303"/>
+            <point key="canvasLocation" x="2909" y="303"/>
         </scene>
         <!--Styles Nav Controller-->
         <scene sceneID="Xg9-xP-6Uc">
@@ -567,7 +557,25 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="C8w-I7-N6y" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1175" y="303"/>
+            <point key="canvasLocation" x="1801" y="303"/>
+        </scene>
+        <!--Login Nav Controller-->
+        <scene sceneID="iKM-ma-bzG">
+            <objects>
+                <navigationController storyboardIdentifier="LoginNavController" title="Login Nav Controller" automaticallyAdjustsScrollViewInsets="NO" id="Vx0-cG-GN3" userLabel="Login Nav Controller" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="NSK-0o-OBx">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="BvS-d4-8qA"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HYc-Kq-u5N" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="97" y="362"/>
         </scene>
     </scenes>
     <resources>
@@ -583,8 +591,8 @@
         <image name="pub-1000" width="1000" height="667"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="D97-Y8-aUF"/>
         <segue reference="pPt-PT-nE8"/>
+        <segue reference="2wn-5y-zxe"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
 </document>

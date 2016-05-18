@@ -16,5 +16,3 @@ end
 
 pod 'MDCSwipeToChoose'
 
-pod 'Material', '~> 1.0'
-

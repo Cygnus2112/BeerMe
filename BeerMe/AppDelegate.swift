@@ -24,7 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let initViewController: UIViewController = storyboard.instantiateViewControllerWithIdentifier("StylesNavController") as UIViewController
             self.window?.rootViewController = initViewController
         } else {
-            let initViewController: UIViewController = storyboard.instantiateViewControllerWithIdentifier("LoginViewController") as UIViewController
+            let initViewController: UIViewController = storyboard.instantiateViewControllerWithIdentifier("LoginNavController") as UIViewController
             self.window?.rootViewController = initViewController
         }
         return true

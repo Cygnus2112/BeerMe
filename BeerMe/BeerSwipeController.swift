@@ -13,7 +13,7 @@ import Alamofire
 import AlamofireImage
 import SwiftyJSON
 
-// Code for Tinder-style swiping. Much of it is borrowed from MDCSwipeToChoose.
+// Code for Tinder-style swiping. Using MDCSwipeToChoose CocoaPod.
 
 class BeerSwipeController: UIViewController, MDCSwipeToChooseDelegate {
     var style = ""
@@ -244,7 +244,7 @@ class BeerSwipeController: UIViewController, MDCSwipeToChooseDelegate {
         button.frame = CGRectMake(ChooseBeerButtonHorizontalPadding, CGRectGetMaxY(self.frontCardView.frame) + ChooseBeerButtonVerticalPadding, image.size.width, image.size.height)
         button.setImage(image, forState: UIControlState.Normal)
        // button.tintColor = UIColor(red: 247.0/255.0, green: 91.0/255.0, blue: 37.0/255.0, alpha: 1.0)
-        button.addTarget(self, action: "nopeFrontCardView", forControlEvents: UIControlEvents.TouchUpInside)
+        button.addTarget(self, action: #selector(BeerSwipeController.nopeFrontCardView), forControlEvents: UIControlEvents.TouchUpInside)
         self.view.addSubview(button)
     }
     
@@ -255,7 +255,7 @@ class BeerSwipeController: UIViewController, MDCSwipeToChooseDelegate {
         button.setImage(image, forState:UIControlState.Normal)
         
         //button.tintColor = UIColor(red: 29.0/255.0, green: 245.0/255.0, blue: 106.0/255.0, alpha: 1.0)
-        button.addTarget(self, action: "likeFrontCardView", forControlEvents: UIControlEvents.TouchUpInside)
+        button.addTarget(self, action: #selector(BeerSwipeController.likeFrontCardView), forControlEvents: UIControlEvents.TouchUpInside)
         self.view.addSubview(button)
         
     }
@@ -272,16 +272,13 @@ class BeerSwipeController: UIViewController, MDCSwipeToChooseDelegate {
         addedLabel.center = CGPointMake(210, 650)
         addedLabel.textAlignment = NSTextAlignment.Center
         addedLabel.text = "Added to Wish List!"
-        addedLabel.textColor = UIColor.redColor()
+        addedLabel.textColor = UIColor.blueColor()
         self.view.addSubview(addedLabel)
     
-        
-        // set the timer
         NSTimer.scheduledTimerWithTimeInterval(3.0, target: self, selector: #selector(BeerSwipeController.dismissAdded), userInfo: nil, repeats: false)
     }
     
     func dismissAdded(){
-        // Dismiss the view from here
         addedLabel.removeFromSuperview()
     }
     
@@ -367,14 +364,14 @@ class BeerSwipeController: UIViewController, MDCSwipeToChooseDelegate {
                             self.wishList.append(beer)
                             
                             dispatch_async(dispatch_get_main_queue()) {
-                                if self.wishList.count == json.count {
+                               if self.wishList.count == json.count + self.wishListBeerArrayWorkaround.count {
                                     
                                     self.dismissViewControllerAnimated(false){
                                         self.performSegueWithIdentifier("SwipeToWishListSegue", sender: nil)
                                     }
                                     
                                     
-                                }
+                               }
                             }
                         }
                     )

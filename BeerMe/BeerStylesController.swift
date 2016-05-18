@@ -148,8 +148,6 @@ class BeerStylesController: UIViewController {
                 let json = JSON(resp)
                 
                 for (key,subJson):(String, JSON) in json {
-                    print("key")
-                    print(key)
                     
                     var label : UIImage!
                     let labelUrl = String(json[key]["label"])
@@ -173,6 +171,11 @@ class BeerStylesController: UIViewController {
                             let beer = Beer(name: String(json[key]["name"]), labelUrl: labelUrl, label: label, id: key, style: String(json[key]["style"]))
                             
                             self.wishList.append(beer)
+                            
+                            print("self.wishList.count in REQ")
+                            print(self.wishList.count)
+                            print("json.count")
+                            print(json.count)
                             
                             dispatch_async(dispatch_get_main_queue()) {
                                 if self.wishList.count == json.count {

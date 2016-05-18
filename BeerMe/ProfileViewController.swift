@@ -11,8 +11,6 @@ import UIKit
 import Alamofire
 import AlamofireImage
 import SwiftyJSON
-import Material
-
 
 // NOTE: This view controller (ProfileViewController) is no longer in use. I'm keeping it around in case I want to implement some version of it later.
 

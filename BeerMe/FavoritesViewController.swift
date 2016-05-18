@@ -17,12 +17,6 @@ class FavoritesViewController : UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-//        if self.wishList.isEmpty {
-//            
-//            // temporary workaround
-//            self.performSegueWithIdentifier("EmptyWishlistSegue", sender: nil)
-//        }
     }
     
     override func viewWillAppear(animated: Bool) {
