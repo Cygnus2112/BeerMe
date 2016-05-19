@@ -31,7 +31,7 @@ class ChooseBeerView: MDCSwipeToChooseView {
         UIViewAutoresizing.FlexibleBottomMargin
         
         self.imageView.contentMode = .ScaleAspectFit
-        //self.imageView.contentMode = .ScaleAspectFill
+        
         let x:CGFloat = 0.0
         let y:CGFloat = 0.0
         let w:CGFloat = 374.0
@@ -81,6 +81,12 @@ class ChooseBeerView: MDCSwipeToChooseView {
         self.nameLabel.font = UIFont(name: "Avenir Next Condensed", size:25)
         self.nameLabel.text = "\(beer.Name)"
         self.nameLabel.textAlignment = .Center
+        
+        self.nameLabel.layer.borderColor = UIColor.blackColor().CGColor
+        self.nameLabel.layer.cornerRadius = 5.0
+        self.nameLabel.layer.masksToBounds = true
+        self.nameLabel.layer.borderWidth = 2
+        
        // self.informationView.addSubview(self.nameLabel)
         self.addSubview(self.nameLabel)
     }

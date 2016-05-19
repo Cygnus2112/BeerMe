@@ -54,13 +54,19 @@ class BeerSwipeController: UIViewController, MDCSwipeToChooseDelegate {
         bgColor.frame = self.view.bounds
         let color1 = UIColor(red:1.00, green:1.00, blue:0.80, alpha:1.0)
         let color2 = UIColor(red:1.00, green:0.80, blue:0.40, alpha:1.0)
-        bgColor.colors = [color1.CGColor, color2.CGColor]
+        bgColor.colors = [color2.CGColor, color1.CGColor]
         view.layer.insertSublayer(bgColor, atIndex: 0)
        
         self.setMyFrontCardView(self.popPersonViewWithFrame(frontCardViewFrame())!)
         self.view.addSubview(self.frontCardView)
 
         self.backCardView = self.popPersonViewWithFrame(backCardViewFrame())!
+        
+        self.backCardView.layer.borderColor = UIColor.blackColor().CGColor
+        self.backCardView.layer.cornerRadius = 5.0
+        self.backCardView.layer.masksToBounds = true
+        self.backCardView.layer.borderWidth = 2
+        
         self.view.insertSubview(self.backCardView, belowSubview: self.frontCardView)
         
         constructNopeButton()
@@ -142,7 +148,6 @@ class BeerSwipeController: UIViewController, MDCSwipeToChooseDelegate {
             showAdded()
             
             print("You liked: \(self.currentBeer.Name)")
-            
         }
         
         if(self.backCardView != nil){
@@ -153,6 +158,13 @@ class BeerSwipeController: UIViewController, MDCSwipeToChooseDelegate {
 
         if(backCardView != nil){
             self.backCardView.alpha = 0.0
+            
+//asdfaoeoeoeoeoeoeoeoe
+            self.backCardView.layer.borderColor = UIColor.blackColor().CGColor
+            self.backCardView.layer.cornerRadius = 5.0
+            self.backCardView.layer.masksToBounds = true
+            self.backCardView.layer.borderWidth = 2
+            
             self.view.insertSubview(self.backCardView, belowSubview: self.frontCardView)
             UIView.animateWithDuration(0.5, delay: 0.0, options: .CurveEaseInOut, animations: {
                 self.backCardView.alpha = 1.0
@@ -161,6 +173,11 @@ class BeerSwipeController: UIViewController, MDCSwipeToChooseDelegate {
     }
     func setMyFrontCardView(frontCardView:ChooseBeerView) -> Void {
         self.frontCardView = frontCardView
+        self.frontCardView.layer.borderColor = UIColor.blackColor().CGColor
+        self.frontCardView.layer.cornerRadius = 5.0
+        self.frontCardView.layer.masksToBounds = true
+        self.frontCardView.layer.borderWidth = 2
+        
         self.currentBeer = frontCardView.beer
     }
     
@@ -246,7 +263,7 @@ class BeerSwipeController: UIViewController, MDCSwipeToChooseDelegate {
     func backCardViewFrame() ->CGRect{
         let frontFrame:CGRect = frontCardViewFrame()
         
-        return CGRectMake(frontFrame.origin.x, frontFrame.origin.y + 10.0, CGRectGetWidth(frontFrame), CGRectGetHeight(frontFrame))
+        return CGRectMake(frontFrame.origin.x, frontFrame.origin.y /* + 10.0 */, CGRectGetWidth(frontFrame), CGRectGetHeight(frontFrame))
     }
     func constructNopeButton() -> Void{
         let button:UIButton =  UIButton(type: UIButtonType.System)

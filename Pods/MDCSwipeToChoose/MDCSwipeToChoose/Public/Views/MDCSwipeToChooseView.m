@@ -50,6 +50,7 @@ static CGFloat const MDCSwipeToChooseViewLabelWidth = 65.f;
         [self constructLikedView];
         [self constructNopeImageView];
         [self setupSwipeToChoose];
+      
     }
     return self;
 }
@@ -91,7 +92,7 @@ static CGFloat const MDCSwipeToChooseViewLabelWidth = 65.f;
     CGFloat xOrigin = CGRectGetMaxX(_imageView.bounds) - width - MDCSwipeToChooseViewHorizontalPadding;
     self.nopeView = [[UIImageView alloc] initWithFrame:CGRectMake(xOrigin,
                                                                   MDCSwipeToChooseViewTopPadding,
-                                                                  width,
+                                                                  width + 50.0,
                                                                   MDCSwipeToChooseViewLabelWidth)];
     [self.nopeView constructBorderedLabelWithText:self.options.nopeText
                                             color:self.options.nopeColor
@@ -124,6 +125,7 @@ static CGFloat const MDCSwipeToChooseViewLabelWidth = 65.f;
             weakself.options.onPan(state);
         }
     };
+ 
 
     [self mdc_swipeToChooseSetup:options];
 }
