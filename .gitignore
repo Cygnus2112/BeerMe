@@ -4,3 +4,5 @@ node_modules/
 Pods/
 server/utilities.js
 BeerMe/APIurls.swift
+BeerMe/BeerMe/APIurls.swift
+APIurls.swift
