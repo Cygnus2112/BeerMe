@@ -5,6 +5,7 @@ var request = require('request');
 var Promise = require('bluebird');
 var bcrypt = require('bcrypt');
 var auth = require('./auth');
+var breweryKey = require('./utilities').breweryKey;
 
 router.post('/signup',function(req,res){
 	var username = req.body.username,
@@ -33,6 +34,8 @@ router.post('/signup',function(req,res){
 					});
 				});
 			});
+  		} else {
+  			res.json({"ERROR" : "username already taken"})
   		}
 	});
 });
@@ -69,13 +72,11 @@ router.get('/fetchbeers', function(req,res){
 	var wishList = {} || req.query.wishList;
 	var dislikes = {} || req.query.dislikes;
 
-	var url = "http://api.brewerydb.com/v2/beers?key=336ad89cea47e683efa68ee5c51f7449&availableId=1&hasLabels=y&order=random&randomCount=10";
+	var url = "http://api.brewerydb.com/v2/beers?key="+breweryKey+"&availableId=1&hasLabels=y&order=random&randomCount=10";
 	
 	if(style === "Pilsner") {
 		style = "Pilsener";
 	}
-	console.log("username ", username);
-	console.log("style ", style);
 
 	// do a while search with random setting and keep checking if we don't find beers w/that style
 
@@ -116,7 +117,7 @@ router.get('/fetchbeers', function(req,res){
 									foundBeers++;
 									beersFetched[beer.id] = {
 										"name": beer.name,
-										"label": beer.labels.large,
+										"label": beer.labels.medium,
 										"style": beer.style.name
 									}
 								}
@@ -192,6 +193,46 @@ router.post('/wishlist', auth.checkUser, function(req,res){
 			console.log('updated wishlist and dislikes');
 		});
 		res.json({"SUCCESS": "updated wishlist and dislikes"});
+	})
+})
+
+router.put('/wishlist', auth.checkUser, function(req,res){
+	var username = req.body.username;
+	var itemToDelete = req.body.wishlist[0];
+	var addToDislikes = req.body.dislikes[0];
+
+	db.User.findOne({username:username},function(err,user){
+		if(err){
+			console.log('err finding user');
+			res.json({"error": err});
+		}
+		if(itemToDelete){
+			var beerId = itemToDelete.id
+			if(beerId in user.wishList){
+				delete user.wishList[beerId];
+				user.markModified('wishList');
+			} else {
+				console.log("not finding beerId in wishList");
+			}
+		}
+		if(!user.dislikes){
+			user.dislikes = {};
+		}
+		if(addToDislikes){
+			user.dislikes[addToDislikes.id] = {
+				"name": addToDislikes.name,
+				"style": addToDislikes.style,
+				"label": addToDislikes.labelUrl
+			}
+			user.markModified('dislikes');
+		}	
+		user.save(function(err,user){
+			if(err){
+				console.log("Error saving wishlist and or dislikes");
+			}
+			console.log('updated wishlist and dislikes in PUT');
+		});
+		res.json({"SUCCESS": "updated wishlist and dislikes in PUT"});
 	})
 })
 

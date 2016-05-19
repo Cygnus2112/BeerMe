@@ -1,3 +1,6 @@
 node_modules/
 .elasticbeanstalk/
 .DS_Store
+Pods/
+server/utilities.js
+BeerMe/APIurls.swift

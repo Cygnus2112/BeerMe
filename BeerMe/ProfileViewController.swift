@@ -12,19 +12,21 @@ import Alamofire
 import AlamofireImage
 import SwiftyJSON
 
+// NOTE: This view controller (ProfileViewController) is no longer in use. I'm keeping it around in case I want to implement some version of it later.
+
+
 class ProfileViewController : UIViewController {
-    
     var wishList : [Beer] = []
     
-    @IBAction func loadWishList(sender: UIButton) {
+    func seriouslyLoadWishList(){
         let username = NSUserDefaults.standardUserDefaults().objectForKey("username")!
         let parameters = ["username": username]
         let headers = ["x-access-token" : String(NSUserDefaults.standardUserDefaults().objectForKey("token")!)]
         let queue = dispatch_queue_create("com.tomleupp.manager-response-queue", DISPATCH_QUEUE_CONCURRENT)
         
-//        let request = Alamofire.request(.GET, "http://localhost:8080/wishlist", parameters: parameters, headers: headers)
+      //  let request = Alamofire.request(.GET, "http://localhost:8080/wishlist", parameters: parameters, headers: headers)
         
-        let request = Alamofire.request(.GET, "http://beermeserver.yxuemvb8nv.us-west-2.elasticbeanstalk.com/wishlist", parameters: parameters, headers: headers)
+        let request = Alamofire.request(.GET, APIurls().wishlist, parameters: parameters, headers: headers)
         
         request.response(
             queue: queue,
@@ -81,9 +83,10 @@ class ProfileViewController : UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
     }
     
+        
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

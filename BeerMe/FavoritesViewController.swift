@@ -11,21 +11,49 @@ import UIKit
 import Alamofire
 
 class FavoritesViewController : UITableViewController {
-    var wishList : [Beer] = []
+//    var wishList : [Beer] = []
+    let bgColor = CAGradientLayer()
+    var wishList = BeerArray().array
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        //let bgColor = CAGradientLayer()
+        bgColor.frame = self.view.bounds
+        let color1 = UIColor(red:1.00, green:1.00, blue:0.80, alpha:1.0)
+        let color2 = UIColor(red:1.00, green:0.80, blue:0.40, alpha:1.0)
+        bgColor.colors = [color1.CGColor, color2.CGColor]
+        view.layer.insertSublayer(bgColor, atIndex: 0)
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        self.tableView.reloadData()
+        self.tableView.numberOfRowsInSection(0)
+        
+        if self.wishList.isEmpty {
+            
+            // temporary workaround
+            self.performSegueWithIdentifier("EmptyWishlistSegue", sender: nil)
+        }
+    }
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
         return wishList.count
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
         let cell = tableView.dequeueReusableCellWithIdentifier("Basic")!
         
         let beer = wishList[indexPath.row]
         cell.textLabel?.text = beer.Name as String
+        
+        cell.textLabel?.font = UIFont(name: "Avenir Next Condensed", size: 20)
         
         return cell
     }
@@ -35,34 +63,26 @@ class FavoritesViewController : UITableViewController {
             let beer = wishList[tableView.indexPathForSelectedRow!.row]
             let name = beer.Name
             let label = beer.Label
+            let labelUrl = beer.LabelUrl
             let style = beer.Style
+            let id = beer.Id
             
             
-            if let dest = segue.destinationViewController as? SingleFavoriteController {
-                dest.title = name as String
+            if let dest = segue.destinationViewController as? BeerDetailViewController {
+                dest.beerName = name as String
                 dest.label = label
+                dest.labelUrl = labelUrl as String
+                dest.id = id as String
                 dest.style = style as String
+                dest.presentingSegue = "FavoriteSegue"
+                
+                dest.currentBeer = beer
+                dest.wishList = self.wishList
                 
             }
         }
-    }
-   
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        if self.wishList.isEmpty {
-//            let backgroundImage = UIImage(named:"beer-pint-350")
-//            let imageView = UIImageView(image: backgroundImage)
-//            self.tableView.backgroundView = imageView
-            
-            // temporary workaround
-            self.performSegueWithIdentifier("EmptyWishlistSegue", sender: nil)
-            
-        }
         
-       
     }
- 
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

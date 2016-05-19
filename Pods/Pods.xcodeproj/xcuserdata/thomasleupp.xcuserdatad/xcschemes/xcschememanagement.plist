@@ -8,39 +8,26 @@
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>0</integer>
 		</dict>
 		<key>AlamofireImage.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>1</integer>
 		</dict>
 		<key>MDCSwipeToChoose.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>2</integer>
 		</dict>
 		<key>Pods-BeerMe.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods-swiftProj.xcscheme</key>
-		<dict>
-			<key>orderHint</key>
-			<integer>3</integer>
-		</dict>
 		<key>SwiftyJSON.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>5</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
@@ -50,12 +37,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>1EA54A88EA26B51E8E8258DE87590FC6</key>
+		<key>79C040AFDDCE1BCBF6D8B5EB0B85887F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>79C040AFDDCE1BCBF6D8B5EB0B85887F</key>
+		<key>7E1F5304D6E55AF60864EBACE6B18673</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -65,7 +52,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>F237E1487DD9CC954FFCA5973C568D8E</key>
+		<key>C0F37F94F3EB1DFE026C8C655A9EDF8C</key>
 		<dict>
 			<key>primary</key>
 			<true/>

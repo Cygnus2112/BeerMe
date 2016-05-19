@@ -14,10 +14,6 @@ import SwiftyJSON
 
 class BeerStylesController: UIViewController {
     
-    @IBAction func backToProfile(sender: UIButton) {
-        self.performSegueWithIdentifier("BackToProfile", sender: nil)
-    }
-    
     // Do the BreweryDB API call on the back-end. When user makes a choice, 
     // send a GET request with username and style choice
     // use username to get likes & dislikes and only send those that
@@ -27,6 +23,8 @@ class BeerStylesController: UIViewController {
     var style = ""
     var wishList : [Beer] = []
     
+    let bgColor = CAGradientLayer()
+    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
         
@@ -34,8 +32,6 @@ class BeerStylesController: UIViewController {
     }
     
     @IBAction func loadBeers(sender: UIButton) {
-        print("style button pressed")
-        print(sender.currentTitle!)
         self.style = sender.currentTitle!
         
         let loadingView = UIAlertController(title: nil, message: "Finding matches...", preferredStyle: .Alert)
@@ -53,9 +49,9 @@ class BeerStylesController: UIViewController {
         
         let queue = dispatch_queue_create("com.tomleupp.manager-response-queue", DISPATCH_QUEUE_CONCURRENT)
         
-//        let request = Alamofire.request(.GET, "http://localhost:8080/fetchbeers", parameters: parameters)
+       // let request = Alamofire.request(.GET, "http://localhost:8080/fetchbeers", parameters: parameters)
         
-        let request = Alamofire.request(.GET, "http://beermeserver.yxuemvb8nv.us-west-2.elasticbeanstalk.com/fetchbeers", parameters: parameters)
+        let request = Alamofire.request(.GET, APIurls().fetchbeers, parameters: parameters)
         
         request.response(
             queue: queue,
@@ -85,9 +81,10 @@ class BeerStylesController: UIViewController {
                                 dispatch_async(dispatch_get_main_queue()) {
                                     if self.beers.count == json.count {
                                         
-                                        self.dismissViewControllerAnimated(false, completion: nil)
+                                        self.dismissViewControllerAnimated(false){
+                                            self.performSegueWithIdentifier("BeerSwipeSegue", sender: nil)
+                                        }
                                         
-                                        self.performSegueWithIdentifier("BeerSwipeSegue", sender: nil)
                                     }
                                 }
                             }
@@ -103,6 +100,92 @@ class BeerStylesController: UIViewController {
         )
     }
     
+    @IBAction func loadWishList(sender: AnyObject) {
+        seriouslyLoadWishList()
+    }
+    
+    func seriouslyLoadWishList(){
+        let loadingView = UIAlertController(title: nil, message: "Fetching Wish List...", preferredStyle: .Alert)
+        
+        loadingView.view.tintColor = UIColor.blackColor()
+        let loadingIndicator: UIActivityIndicatorView = UIActivityIndicatorView(frame: CGRectMake(10, 5, 50, 50)) as UIActivityIndicatorView
+        loadingIndicator.hidesWhenStopped = true
+        loadingIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
+        loadingIndicator.startAnimating();
+        
+        loadingView.view.addSubview(loadingIndicator)
+        presentViewController(loadingView, animated: true, completion: nil)
+        
+ 
+        let username = NSUserDefaults.standardUserDefaults().objectForKey("username")!
+        let parameters = ["username": username]
+        let headers = ["x-access-token" : String(NSUserDefaults.standardUserDefaults().objectForKey("token")!)]
+        let queue = dispatch_queue_create("com.tomleupp.manager-response-queue", DISPATCH_QUEUE_CONCURRENT)
+        
+        //let request = Alamofire.request(.GET, "http://localhost:8080/wishlist", parameters: parameters, headers: headers)
+        
+        let request = Alamofire.request(.GET, APIurls().wishlist, parameters: parameters, headers: headers)
+        
+        request.response(
+            queue: queue,
+            responseSerializer: Request.JSONResponseSerializer(options: .AllowFragments),
+            completionHandler: { response in
+                
+                guard let resp = response.result.value else {
+                    print("No wishlist!")
+                    self.dismissViewControllerAnimated(false){
+                        self.performSegueWithIdentifier("StylesToWishlistSegue", sender: nil)
+                    }
+                    return
+                }
+                
+                if resp.allKeys.count == 0 {
+                    print("No wishlist!")
+                    self.dismissViewControllerAnimated(false){
+                        self.performSegueWithIdentifier("StylesToWishlistSegue", sender: nil)
+                    }
+                }
+                
+                let json = JSON(resp)
+                
+                for (key,subJson):(String, JSON) in json {
+                    
+                    var label : UIImage!
+                    let labelUrl = String(json[key]["label"])
+                    let queue2 = dispatch_queue_create("com.tomleupp.manager-response-queue", DISPATCH_QUEUE_CONCURRENT)
+                    
+                    let request2 = Alamofire.request(.GET, labelUrl)
+                    
+                    request2.response(
+                        queue: queue2,
+                        responseSerializer: Request.imageResponseSerializer(),
+                        completionHandler: { response in
+                            label = response.result.value!
+                            
+                            let beer = Beer(name: String(json[key]["name"]), labelUrl: labelUrl, label: label, id: key, style: String(json[key]["style"]))
+                            
+                            self.wishList.append(beer)
+                            
+                            dispatch_async(dispatch_get_main_queue()) {
+                                if self.wishList.count == json.count {
+                                    
+                                    self.dismissViewControllerAnimated(false){
+                                        self.performSegueWithIdentifier("StylesToWishlistSegue", sender: nil)
+                                    }
+  
+                                }
+                            }
+                        }
+                    )
+                }
+                dispatch_async(dispatch_get_main_queue()) {
+                    
+                }
+            }
+        )
+    }
+
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
        if (segue.identifier == "BeerSwipeSegue") {
             if let dest = segue.destinationViewController as? BeerSwipeController {
@@ -110,11 +193,25 @@ class BeerStylesController: UIViewController {
                 dest.beers = self.beers
             }
         }
+        if (segue.identifier == "StylesToWishlistSegue") {
+            if let nav = segue.destinationViewController as? UINavigationController {
+                let dest = nav.topViewController as! FavoritesViewController
+                dest.wishList = self.wishList
+            }
+        }
        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        bgColor.frame = self.view.bounds
+        let color1 = UIColor(red:1.00, green:1.00, blue:0.80, alpha:1.0)
+        let color2 = UIColor(red:1.00, green:0.80, blue:0.40, alpha:1.0)
+        bgColor.colors = [color1.CGColor, color2.CGColor]
+        view.layer.insertSublayer(bgColor, atIndex: 0)
+    
+        
         // Do any additional setup after loading the view, typically from a nib.
     }
     

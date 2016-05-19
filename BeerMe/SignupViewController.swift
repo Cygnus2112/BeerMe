@@ -17,8 +17,7 @@ class SignupViewController : UIViewController {
     @IBOutlet weak var email: UITextField!
     @IBOutlet weak var username: UITextField!
     @IBOutlet weak var password: UITextField!
-    
-    @IBOutlet weak var errorMessage: UILabel!  // TODO: form validation for signup
+    @IBOutlet weak var errorMessage: UILabel!
     
     @IBAction func signupButton(sender: UIButton) {
         // TODO: instantiate new User model instance instead of this...
@@ -32,27 +31,29 @@ class SignupViewController : UIViewController {
         
         let queue = dispatch_queue_create("com.tomleupp.manager-response-queue", DISPATCH_QUEUE_CONCURRENT)
         
-//        let request = Alamofire.request(.POST, "http://localhost:8080/signup", parameters: parameters,encoding: .JSON)
-        let request = Alamofire.request(.POST, "http://beermeserver.yxuemvb8nv.us-west-2.elasticbeanstalk.com/signup", parameters: parameters,encoding: .JSON)
+        //let request = Alamofire.request(.POST, "http://localhost:8080/signup", parameters: parameters,encoding: .JSON)
         
-        
-        
+        let request = Alamofire.request(.POST, APIurls().signup, parameters: parameters,encoding: .JSON)
         request.response(
             queue: queue,
             responseSerializer: Request.JSONResponseSerializer(options: .AllowFragments),
             completionHandler: { response in
+                let resp = JSON(response.result.value!)
+                //print("token:")
+                //print(resp)
                 
-                let token = JSON(response.result.value!)
-                print("token (hopefully):")
-                print(token)
-                
-                dispatch_async(dispatch_get_main_queue()) {
+                if resp["ERROR"] != nil {
+                    dispatch_async(dispatch_get_main_queue()) {
+                        self.errorMessage.text = "That username is already taken."
+                    }
+                } else {
+                    dispatch_async(dispatch_get_main_queue()) {
+                        NSUserDefaults.standardUserDefaults().setObject(self.username.text!, forKey: "username")
+                        NSUserDefaults.standardUserDefaults().setObject(self.password.text!, forKey: "password")
+                        NSUserDefaults.standardUserDefaults().setObject(String(resp["token"]), forKey: "token")
                     
-                    NSUserDefaults.standardUserDefaults().setObject(self.username.text!, forKey: "username")
-                    NSUserDefaults.standardUserDefaults().setObject(self.password.text!, forKey: "password")
-                    NSUserDefaults.standardUserDefaults().setObject(String(token["token"]), forKey: "token")
-                    
-                    self.performSegueWithIdentifier("SignupToProfileSegue", sender: nil)
+                        self.performSegueWithIdentifier("SignupToStylesSegue", sender: nil)
+                    }
                 }
             }
         )
