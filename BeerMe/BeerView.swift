@@ -31,6 +31,13 @@ class ChooseBeerView: MDCSwipeToChooseView {
         UIViewAutoresizing.FlexibleBottomMargin
         
         self.imageView.contentMode = .ScaleAspectFit
+        //self.imageView.contentMode = .ScaleAspectFill
+        let x:CGFloat = 0.0
+        let y:CGFloat = 0.0
+        let w:CGFloat = 374.0
+        let h:CGFloat = 374.0
+        
+        self.imageView.frame = CGRectMake(x,y,w,h)
         
         self.imageView.autoresizingMask = self.autoresizingMask
         constructInformationView()
@@ -41,30 +48,41 @@ class ChooseBeerView: MDCSwipeToChooseView {
     }
     
     func constructInformationView() -> Void{
-        let bottomHeight:CGFloat = 60.0
+    /*    let bottomHeight:CGFloat = 60.0
+        //let bottomHeight:CGFloat = 200.0
         let bottomFrame:CGRect = CGRectMake(0,
-                                            (CGRectGetHeight(self.bounds) - bottomHeight),
+                                            (CGRectGetHeight(self.bounds) + bottomHeight),
                                             CGRectGetWidth(self.bounds),
                                             bottomHeight);
         self.informationView = UIView(frame:bottomFrame)
-        self.informationView.backgroundColor = UIColor.whiteColor()
-        self.informationView.clipsToBounds = true
+       // self.informationView.backgroundColor = UIColor.whiteColor()
+       // self.informationView.clipsToBounds = true
         self.informationView.autoresizingMask = [UIViewAutoresizing.FlexibleWidth, UIViewAutoresizing.FlexibleTopMargin]
-        self.addSubview(self.informationView)
+        self.addSubview(self.informationView)    */
         constructNameLabel()
     }
     
     func constructNameLabel() -> Void{
-        let leftPadding:CGFloat = 12.0
-        let topPadding:CGFloat = 17.0
+        let leftPadding:CGFloat = 0.0
+        //let topPadding:CGFloat = 17.0
+        let topPadding:CGFloat = 370.0
+        //let topPadding:CGFloat = 30.0
+//        let frame:CGRect = CGRectMake(leftPadding,
+//                                      topPadding,floor(CGRectGetWidth(self.informationView.frame)/2),
+//                                      CGRectGetHeight(self.informationView.frame) - topPadding)
+        let w:CGFloat = 374.0
+        let h:CGFloat = 70.0
         let frame:CGRect = CGRectMake(leftPadding,
-                                      topPadding,floor(CGRectGetWidth(self.informationView.frame)/2),
+                                      topPadding,w,
+                                      h)
 
-                                      CGRectGetHeight(self.informationView.frame) - topPadding)
         self.nameLabel = UILabel(frame:frame)
+        self.nameLabel.backgroundColor = UIColor.whiteColor()
         self.nameLabel.font = UIFont(name: "Avenir Next Condensed", size:25)
         self.nameLabel.text = "\(beer.Name)"
-        self.informationView .addSubview(self.nameLabel)
+        self.nameLabel.textAlignment = .Center
+       // self.informationView.addSubview(self.nameLabel)
+        self.addSubview(self.nameLabel)
     }
 
 }

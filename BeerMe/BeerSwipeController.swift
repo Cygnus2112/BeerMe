@@ -16,6 +16,8 @@ import SwiftyJSON
 // Code for Tinder-style swiping. Using MDCSwipeToChoose CocoaPod.
 
 class BeerSwipeController: UIViewController, MDCSwipeToChooseDelegate {
+    let bgColor = CAGradientLayer()
+    
     var style = ""
     var beers:[Beer] = []
     var wishList: [Beer] = []
@@ -28,7 +30,7 @@ class BeerSwipeController: UIViewController, MDCSwipeToChooseDelegate {
     var dislikesToAdd : [AnyObject] = []
     
     let ChooseBeerButtonHorizontalPadding:CGFloat = 40.0
-    let ChooseBeerButtonVerticalPadding:CGFloat = 40.0
+    let ChooseBeerButtonVerticalPadding:CGFloat = 60.0
     var currentBeer:Beer!
     var frontCardView:ChooseBeerView!
     var backCardView:ChooseBeerView!
@@ -48,6 +50,12 @@ class BeerSwipeController: UIViewController, MDCSwipeToChooseDelegate {
     
     override func viewDidLoad(){
         super.viewDidLoad()
+        
+        bgColor.frame = self.view.bounds
+        let color1 = UIColor(red:1.00, green:1.00, blue:0.80, alpha:1.0)
+        let color2 = UIColor(red:1.00, green:0.80, blue:0.40, alpha:1.0)
+        bgColor.colors = [color1.CGColor, color2.CGColor]
+        view.layer.insertSublayer(bgColor, atIndex: 0)
        
         self.setMyFrontCardView(self.popPersonViewWithFrame(frontCardViewFrame())!)
         self.view.addSubview(self.frontCardView)
@@ -74,7 +82,8 @@ class BeerSwipeController: UIViewController, MDCSwipeToChooseDelegate {
         let queue = dispatch_queue_create("com.tomleupp.manager-response-queue", DISPATCH_QUEUE_CONCURRENT)
         
        // let request = Alamofire.request(.POST, "http://localhost:8080/wishlist", parameters: parameters, headers: headers, encoding: .JSON)
-        let request = Alamofire.request(.POST, "http://beermeserver.yxuemvb8nv.us-west-2.elasticbeanstalk.com/wishlist", parameters: parameters, headers: headers, encoding: .JSON)
+        
+        let request = Alamofire.request(.POST, APIurls().wishlist, parameters: parameters, headers: headers, encoding: .JSON)
         
         request.response(
             queue: queue,
@@ -181,7 +190,7 @@ class BeerSwipeController: UIViewController, MDCSwipeToChooseDelegate {
             let queue = dispatch_queue_create("com.tomleupp.manager-response-queue", DISPATCH_QUEUE_CONCURRENT)
             
         //    let request = Alamofire.request(.GET, "http://localhost:8080/fetchbeers", parameters: parameters)
-            let request = Alamofire.request(.GET, "http://beermeserver.yxuemvb8nv.us-west-2.elasticbeanstalk.com/fetchbeers", parameters: parameters)
+            let request = Alamofire.request(.GET, APIurls().fetchbeers, parameters: parameters)
             
             
             request.response(
@@ -202,8 +211,6 @@ class BeerSwipeController: UIViewController, MDCSwipeToChooseDelegate {
                             queue: queue2,
                             responseSerializer: Request.imageResponseSerializer(),
                             completionHandler: { response in
-          
-                                
                                 label = response.result.value!
                                 
                                 let beer = Beer(name: String(json[key]["name"]), labelUrl: labelUrl, label: label, id: key, style: String(json[key]["style"]))
@@ -211,13 +218,11 @@ class BeerSwipeController: UIViewController, MDCSwipeToChooseDelegate {
                                 self.beers.append(beer)
                                 
                                 dispatch_async(dispatch_get_main_queue()) {
-                                   
                                 }
                             }
                         )
                     }
                     dispatch_async(dispatch_get_main_queue()) {
-                        
                       
                     }
                 }
@@ -228,21 +233,27 @@ class BeerSwipeController: UIViewController, MDCSwipeToChooseDelegate {
     }
     func frontCardViewFrame() -> CGRect{
         let horizontalPadding:CGFloat = 20.0
-        //let topPadding:CGFloat = 60.0
-        let topPadding:CGFloat = 80.0
+        let topPadding:CGFloat = 100.0
+       
         // let bottomPadding:CGFloat = 200.0
-        let bottomPadding:CGFloat = 300.0
-        return CGRectMake(horizontalPadding,topPadding,CGRectGetWidth(self.view.frame) - (horizontalPadding * 2), CGRectGetHeight(self.view.frame) - bottomPadding)
+        
+        let w:CGFloat = 374.0
+        let h:CGFloat = 440.0
+        
+        //return CGRectMake(horizontalPadding,topPadding,CGRectGetWidth(self.view.frame) - (horizontalPadding * 2), CGRectGetHeight(self.view.frame) - bottomPadding)
+        return CGRectMake(horizontalPadding,topPadding,w,h)
     }
     func backCardViewFrame() ->CGRect{
         let frontFrame:CGRect = frontCardViewFrame()
+        
         return CGRectMake(frontFrame.origin.x, frontFrame.origin.y + 10.0, CGRectGetWidth(frontFrame), CGRectGetHeight(frontFrame))
     }
     func constructNopeButton() -> Void{
         let button:UIButton =  UIButton(type: UIButtonType.System)
-        let image:UIImage = UIImage(named:"No thanks-31")!
+        let image:UIImage = UIImage(named:"NoThanks2")!
         button.frame = CGRectMake(ChooseBeerButtonHorizontalPadding, CGRectGetMaxY(self.frontCardView.frame) + ChooseBeerButtonVerticalPadding, image.size.width, image.size.height)
         button.setImage(image, forState: UIControlState.Normal)
+        button.tintColor = UIColor.redColor()
        // button.tintColor = UIColor(red: 247.0/255.0, green: 91.0/255.0, blue: 37.0/255.0, alpha: 1.0)
         button.addTarget(self, action: #selector(BeerSwipeController.nopeFrontCardView), forControlEvents: UIControlEvents.TouchUpInside)
         self.view.addSubview(button)
@@ -250,10 +261,10 @@ class BeerSwipeController: UIViewController, MDCSwipeToChooseDelegate {
     
     func constructLikedButton() -> Void{
         let button:UIButton = UIButton(type: UIButtonType.System)
-        let image:UIImage = UIImage(named:"BeerMeLogo-small")!
-        button.frame = CGRectMake(CGRectGetMaxX(self.view.frame) - image.size.width - (ChooseBeerButtonHorizontalPadding+2), CGRectGetMaxY(self.frontCardView.frame) + (ChooseBeerButtonVerticalPadding-2), image.size.width, image.size.height)
+        let image:UIImage = UIImage(named:"BeerMeLogo-mini")!
+        button.frame = CGRectMake(CGRectGetMaxX(self.view.frame) - image.size.width - (ChooseBeerButtonHorizontalPadding+2), CGRectGetMaxY(self.frontCardView.frame) + (ChooseBeerButtonVerticalPadding+1), image.size.width, image.size.height)
         button.setImage(image, forState:UIControlState.Normal)
-        
+        button.tintColor = UIColor(red:1.00, green:0.62, blue:0.00, alpha:1.0)
         //button.tintColor = UIColor(red: 29.0/255.0, green: 245.0/255.0, blue: 106.0/255.0, alpha: 1.0)
         button.addTarget(self, action: #selector(BeerSwipeController.likeFrontCardView), forControlEvents: UIControlEvents.TouchUpInside)
         self.view.addSubview(button)
@@ -269,10 +280,13 @@ class BeerSwipeController: UIViewController, MDCSwipeToChooseDelegate {
     var addedLabel:UILabel!
     func showAdded() {
         addedLabel = UILabel(frame: CGRectMake(0, 0, 200, 30))
-        addedLabel.center = CGPointMake(210, 650)
+        addedLabel.center = CGPointMake(210, 675)
         addedLabel.textAlignment = NSTextAlignment.Center
         addedLabel.text = "Added to Wish List!"
         addedLabel.textColor = UIColor.blueColor()
+        addedLabel.backgroundColor = UIColor.whiteColor()
+        addedLabel.layer.masksToBounds = true
+        addedLabel.layer.cornerRadius = 5
         self.view.addSubview(addedLabel)
     
         NSTimer.scheduledTimerWithTimeInterval(3.0, target: self, selector: #selector(BeerSwipeController.dismissAdded), userInfo: nil, repeats: false)
@@ -315,7 +329,7 @@ class BeerSwipeController: UIViewController, MDCSwipeToChooseDelegate {
         
         //let request = Alamofire.request(.GET, "http://localhost:8080/wishlist", parameters: parameters, headers: headers)
         
-        let request = Alamofire.request(.GET, "http://beermeserver.yxuemvb8nv.us-west-2.elasticbeanstalk.com/wishlist", parameters: parameters, headers: headers)
+        let request = Alamofire.request(.GET, APIurls().wishlist, parameters: parameters, headers: headers)
         
         request.response(
             queue: queue,

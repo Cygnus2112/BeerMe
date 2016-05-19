@@ -1,10 +1,11 @@
 var mongoose = require('mongoose');
+var dbURI = require('./utilities').dbURI;
 
 var db = {};
 
 //******DATABASE SET UP
 
-db.dbURI = 'mongodb://beermeadmin:abc123@ds047682.mlab.com:47682/beerme';
+db.dbURI = dbURI;
 mongoose.connect(db.dbURI);
 db.Schema = mongoose.Schema;
 db.userSchema = new db.Schema ({

@@ -38,7 +38,7 @@ class LoginViewController: UIViewController {
             let queue = dispatch_queue_create("com.tomleupp.manager-response-queue", DISPATCH_QUEUE_CONCURRENT)
             
 //            let request = Alamofire.request(.POST, "http://localhost:8080/login", parameters: parameters,encoding: .JSON)
-            let request = Alamofire.request(.POST, "http://beermeserver.yxuemvb8nv.us-west-2.elasticbeanstalk.com/login", parameters: parameters,encoding: .JSON)
+            let request = Alamofire.request(.POST, APIurls().login, parameters: parameters,encoding: .JSON)
             
             request.response(
                 queue: queue,

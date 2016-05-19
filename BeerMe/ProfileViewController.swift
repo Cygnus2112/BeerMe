@@ -26,7 +26,7 @@ class ProfileViewController : UIViewController {
         
       //  let request = Alamofire.request(.GET, "http://localhost:8080/wishlist", parameters: parameters, headers: headers)
         
-        let request = Alamofire.request(.GET, "http://beermeserver.yxuemvb8nv.us-west-2.elasticbeanstalk.com/wishlist", parameters: parameters, headers: headers)
+        let request = Alamofire.request(.GET, APIurls().wishlist, parameters: parameters, headers: headers)
         
         request.response(
             queue: queue,

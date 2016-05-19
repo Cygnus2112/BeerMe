@@ -23,6 +23,7 @@ class BeerStylesController: UIViewController {
     var style = ""
     var wishList : [Beer] = []
     
+    let bgColor = CAGradientLayer()
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
@@ -50,7 +51,7 @@ class BeerStylesController: UIViewController {
         
        // let request = Alamofire.request(.GET, "http://localhost:8080/fetchbeers", parameters: parameters)
         
-        let request = Alamofire.request(.GET, "http://beermeserver.yxuemvb8nv.us-west-2.elasticbeanstalk.com/fetchbeers", parameters: parameters)
+        let request = Alamofire.request(.GET, APIurls().fetchbeers, parameters: parameters)
         
         request.response(
             queue: queue,
@@ -123,7 +124,7 @@ class BeerStylesController: UIViewController {
         
         //let request = Alamofire.request(.GET, "http://localhost:8080/wishlist", parameters: parameters, headers: headers)
         
-        let request = Alamofire.request(.GET, "http://beermeserver.yxuemvb8nv.us-west-2.elasticbeanstalk.com/wishlist", parameters: parameters, headers: headers)
+        let request = Alamofire.request(.GET, APIurls().wishlist, parameters: parameters, headers: headers)
         
         request.response(
             queue: queue,
@@ -155,13 +156,6 @@ class BeerStylesController: UIViewController {
                     
                     let request2 = Alamofire.request(.GET, labelUrl)
                     
-                    print("self.wishList.count")
-                    print(self.wishList.count)
-                    print("json.count")
-                    print(json.count)
-                    
-                    
-                    
                     request2.response(
                         queue: queue2,
                         responseSerializer: Request.imageResponseSerializer(),
@@ -171,11 +165,6 @@ class BeerStylesController: UIViewController {
                             let beer = Beer(name: String(json[key]["name"]), labelUrl: labelUrl, label: label, id: key, style: String(json[key]["style"]))
                             
                             self.wishList.append(beer)
-                            
-                            print("self.wishList.count in REQ")
-                            print(self.wishList.count)
-                            print("json.count")
-                            print(json.count)
                             
                             dispatch_async(dispatch_get_main_queue()) {
                                 if self.wishList.count == json.count {
@@ -215,6 +204,14 @@ class BeerStylesController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        bgColor.frame = self.view.bounds
+        let color1 = UIColor(red:1.00, green:1.00, blue:0.80, alpha:1.0)
+        let color2 = UIColor(red:1.00, green:0.80, blue:0.40, alpha:1.0)
+        bgColor.colors = [color1.CGColor, color2.CGColor]
+        view.layer.insertSublayer(bgColor, atIndex: 0)
+    
+        
         // Do any additional setup after loading the view, typically from a nib.
     }
     

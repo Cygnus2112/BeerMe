@@ -229,7 +229,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9Zg-ub-lGU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="31" y="1369"/>
+            <point key="canvasLocation" x="-375" y="1329"/>
         </scene>
         <!--Wish List View Controller-->
         <scene sceneID="Ufg-N6-kKf">
@@ -282,7 +282,7 @@
         <!--Empty Wishlist Controller-->
         <scene sceneID="iEC-ha-AM2">
             <objects>
-                <viewController storyboardIdentifier="EmptyWishlist" title="Empty Wishlist Controller" id="ozj-vf-avE" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EmptyWishlist" title="Empty Wishlist Controller" id="ozj-vf-avE" customClass="EmptyWishListViewController" customModule="BeerMe" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="rEj-kv-dEc">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -390,6 +390,27 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8HH-BU-une" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1842" y="1247"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="Gh3-An-qne">
+            <objects>
+                <viewController id="eQC-UU-oD2" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="jMG-vM-8cx">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="pub_image_blur_small" id="gVf-cP-K1D">
+                                <rect key="frame" x="-102" y="50" width="631" height="667"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="f7x-Q3-l9n" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="74" y="1320"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="uTm-fp-SYS">
@@ -589,10 +610,11 @@
         <image name="ic_favorite" width="24" height="24"/>
         <image name="ic_search" width="24" height="24"/>
         <image name="pub-1000" width="1000" height="667"/>
+        <image name="pub_image_blur_small" width="631" height="667"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="pPt-PT-nE8"/>
-        <segue reference="2wn-5y-zxe"/>
+        <segue reference="TaF-TH-NVq"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
 </document>

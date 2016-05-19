@@ -33,14 +33,14 @@ class SignupViewController : UIViewController {
         
         //let request = Alamofire.request(.POST, "http://localhost:8080/signup", parameters: parameters,encoding: .JSON)
         
-        let request = Alamofire.request(.POST, "http://beermeserver.yxuemvb8nv.us-west-2.elasticbeanstalk.com/signup", parameters: parameters,encoding: .JSON)
+        let request = Alamofire.request(.POST, APIurls().signup, parameters: parameters,encoding: .JSON)
         request.response(
             queue: queue,
             responseSerializer: Request.JSONResponseSerializer(options: .AllowFragments),
             completionHandler: { response in
                 let resp = JSON(response.result.value!)
-                print("token (hopefully):")
-                print(resp)
+                //print("token:")
+                //print(resp)
                 
                 if resp["ERROR"] != nil {
                     dispatch_async(dispatch_get_main_queue()) {

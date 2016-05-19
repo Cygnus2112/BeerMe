@@ -5,6 +5,7 @@ var request = require('request');
 var Promise = require('bluebird');
 var bcrypt = require('bcrypt');
 var auth = require('./auth');
+var breweryKey = require('./utilities').breweryKey;
 
 router.post('/signup',function(req,res){
 	var username = req.body.username,
@@ -71,13 +72,11 @@ router.get('/fetchbeers', function(req,res){
 	var wishList = {} || req.query.wishList;
 	var dislikes = {} || req.query.dislikes;
 
-	var url = "http://api.brewerydb.com/v2/beers?key=336ad89cea47e683efa68ee5c51f7449&availableId=1&hasLabels=y&order=random&randomCount=10";
+	var url = "http://api.brewerydb.com/v2/beers?key="+breweryKey+"&availableId=1&hasLabels=y&order=random&randomCount=10";
 	
 	if(style === "Pilsner") {
 		style = "Pilsener";
 	}
-	console.log("username ", username);
-	console.log("style ", style);
 
 	// do a while search with random setting and keep checking if we don't find beers w/that style
 

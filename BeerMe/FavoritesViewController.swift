@@ -12,11 +12,17 @@ import Alamofire
 
 class FavoritesViewController : UITableViewController {
 //    var wishList : [Beer] = []
-    
+    let bgColor = CAGradientLayer()
     var wishList = BeerArray().array
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //let bgColor = CAGradientLayer()
+        bgColor.frame = self.view.bounds
+        let color1 = UIColor(red:1.00, green:1.00, blue:0.80, alpha:1.0)
+        let color2 = UIColor(red:1.00, green:0.80, blue:0.40, alpha:1.0)
+        bgColor.colors = [color1.CGColor, color2.CGColor]
+        view.layer.insertSublayer(bgColor, atIndex: 0)
     }
     
     override func viewWillAppear(animated: Bool) {

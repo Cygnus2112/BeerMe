@@ -15,6 +15,8 @@ import SwiftyJSON
 
 class BeerDetailViewController : UIViewController, UINavigationControllerDelegate {
     
+    let bgColor = CAGradientLayer()
+    
     let username = NSUserDefaults.standardUserDefaults().objectForKey("username")!
     var beerName = ""
     var style = ""
@@ -78,6 +80,12 @@ class BeerDetailViewController : UIViewController, UINavigationControllerDelegat
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        bgColor.frame = self.view.bounds
+        let color1 = UIColor(red:1.00, green:1.00, blue:0.80, alpha:1.0)
+        let color2 = UIColor(red:1.00, green:0.80, blue:0.40, alpha:1.0)
+        bgColor.colors = [color1.CGColor, color2.CGColor]
+        view.layer.insertSublayer(bgColor, atIndex: 0)
+        
         navigationController?.delegate = self
         
         self.beerLabel.image = label
@@ -123,7 +131,7 @@ class BeerDetailViewController : UIViewController, UINavigationControllerDelegat
             let queue = dispatch_queue_create("com.tomleupp.manager-response-queue", DISPATCH_QUEUE_CONCURRENT)
         
            //     let request = Alamofire.request(.PUT, "http://localhost:8080/wishlist", parameters: parameters, headers: headers, encoding: .JSON)
-            let request = Alamofire.request(.PUT, "http://beermeserver.yxuemvb8nv.us-west-2.elasticbeanstalk.com/wishlist", parameters: parameters, headers: headers, encoding: .JSON)
+            let request = Alamofire.request(.PUT, APIurls().wishlist, parameters: parameters, headers: headers, encoding: .JSON)
         
             request.response(
                 queue: queue,
