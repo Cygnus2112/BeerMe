@@ -1,14 +1,3 @@
-node_modules/
-.elasticbeanstalk/
-.DS_Store
-Pods/
-server/utilities.js
-BeerMe/APIurls.swift
-BeerMe/BeerMe/APIurls.swift
-APIurls.swift
-
-## Swift stuff...
-
 ## Build generated
 build/
 DerivedData/
@@ -37,3 +26,7 @@ xcuserdata/
 ## Playgrounds
 timeline.xctimeline
 playground.xcworkspace
+
+APIurls
+APIurls.swift
+BeerMe/APIurls.swift

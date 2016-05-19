@@ -83,12 +83,17 @@ class BeerDetailViewController : UIViewController, UINavigationControllerDelegat
         bgColor.frame = self.view.bounds
         let color1 = UIColor(red:1.00, green:1.00, blue:0.80, alpha:1.0)
         let color2 = UIColor(red:1.00, green:0.80, blue:0.40, alpha:1.0)
-        bgColor.colors = [color1.CGColor, color2.CGColor]
+        bgColor.colors = [color2.CGColor, color1.CGColor]
         view.layer.insertSublayer(bgColor, atIndex: 0)
         
         navigationController?.delegate = self
         
         self.beerLabel.image = label
+        self.beerLabel.layer.borderColor = UIColor.blackColor().CGColor
+        self.beerLabel.layer.cornerRadius = 5.0
+        self.beerLabel.layer.masksToBounds = true
+        self.beerLabel.layer.borderWidth = 2
+        
         self.beerNameLabel.text = beerName
         self.beerStyleLabel.text = style
         
