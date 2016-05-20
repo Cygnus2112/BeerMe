@@ -6,24 +6,25 @@ Swipe your way to craft-beer nirvana with BeerMe!, a fun way to expand your beer
 
 The BeerMe! tech stack includes the following languages and frameworks...
 
-####Front end:
+####Front End:
 
 * Swift 2.2
 * Xcode 7.3.1
 * AlamoFire
-* MDCSwipeToView (a great framework for Tinder-style swiping)
+* SwiftyJSON
+* MDCSwipeToChoose (a great framework for Tinder-style swiping)
 
-####Back end:
+####Back End:
 
 * Node.js/Express
 * MongoDB (mLab + Mongoose.js)
-* AWS Electric Beanstalk hosting
+* AWS Electric Beanstalk for hosting
 
 BeerMe! uses the amazing BreweryDB API for all of its beer data. 
 
 ####How It Works
 
-Log in, choose a style, and swipe through a continuosly-reloading assortment of beers chosen at random. 
+Log in, choose a style, and swipe through a continuously reloading assortment of beers chosen at random. 
 
 ![swipe_views](assets/swipe_views.png)
 
