@@ -3,9 +3,7 @@ node_modules/
 .DS_Store
 Pods/
 server/utilities.js
-BeerMe/APIurls.swift
-BeerMe/BeerMe/APIurls.swift
-APIurls.swift
+
 
 ## Swift stuff...
 
@@ -37,3 +35,10 @@ xcuserdata/
 ## Playgrounds
 timeline.xctimeline
 playground.xcworkspace
+
+BeerMe/APIurls.swift
+BeerMe/APIurls
+BeerMe/BeerMe/APIurls.swift
+BeerMe/BeerMe/APIurls
+APIurls.swift
+APIurls
