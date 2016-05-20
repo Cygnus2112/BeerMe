@@ -10,7 +10,6 @@
 		78D463804F86BFEDA1557F43 /* Pods_BeerMe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9417D0EA98824A34AA24C38F /* Pods_BeerMe.framework */; };
 		C20EF63E1CDC1243005E7DB6 /* BeerStylesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20EF63D1CDC1242005E7DB6 /* BeerStylesController.swift */; };
 		C213B1981CED5DBD0066DA57 /* APIurls.swift in Sources */ = {isa = PBXBuildFile; fileRef = C213B1971CED5DBD0066DA57 /* APIurls.swift */; };
-		C213B19E1CED9C880066DA57 /* Swift.gitignore in Resources */ = {isa = PBXBuildFile; fileRef = C213B19D1CED9C880066DA57 /* Swift.gitignore */; };
 		C22252A51CE6134000677F32 /* EmptyWishlistController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C22252A41CE6133F00677F32 /* EmptyWishlistController.swift */; };
 		C235CAA11CE237260037CADB /* AvenirNextCondensed-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C235CAA01CE237260037CADB /* AvenirNextCondensed-Regular.ttf */; };
 		C29DF9641CD59F8300E90770 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C29DF9631CD59F8300E90770 /* AppDelegate.swift */; };
@@ -34,7 +33,6 @@
 		A8B1F124F61CECD8BFC59C3B /* Pods-BeerMe.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeerMe.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BeerMe/Pods-BeerMe.debug.xcconfig"; sourceTree = "<group>"; };
 		C20EF63D1CDC1242005E7DB6 /* BeerStylesController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeerStylesController.swift; sourceTree = "<group>"; };
 		C213B1971CED5DBD0066DA57 /* APIurls.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIurls.swift; sourceTree = "<group>"; };
-		C213B19D1CED9C880066DA57 /* Swift.gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Swift.gitignore; path = ../Swift.gitignore; sourceTree = "<group>"; };
 		C22252A41CE6133F00677F32 /* EmptyWishlistController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptyWishlistController.swift; sourceTree = "<group>"; };
 		C235CAA01CE237260037CADB /* AvenirNextCondensed-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "AvenirNextCondensed-Regular.ttf"; sourceTree = "<group>"; };
 		C29DF9601CD59F8300E90770 /* BeerMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BeerMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -86,6 +84,13 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		C213B19F1CEE658B0066DA57 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Utils;
+			sourceTree = "<group>";
+		};
 		C29DF9571CD59F8300E90770 = {
 			isa = PBXGroup;
 			children = (
@@ -107,8 +112,8 @@
 		C29DF9621CD59F8300E90770 /* BeerMe */ = {
 			isa = PBXGroup;
 			children = (
-				C213B19D1CED9C880066DA57 /* Swift.gitignore */,
 				C213B1971CED5DBD0066DA57 /* APIurls.swift */,
+				C213B19F1CEE658B0066DA57 /* Utils */,
 				C2A194191CD91C1B00B69249 /* Views */,
 				C2A194181CD91C1000B69249 /* Controllers */,
 				C2A194171CD91BE600B69249 /* Models */,
@@ -216,7 +221,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C213B19E1CED9C880066DA57 /* Swift.gitignore in Resources */,
 				C2ED08FF1CE12C170040B1B5 /* LaunchScreen.storyboard in Resources */,
 				C235CAA11CE237260037CADB /* AvenirNextCondensed-Regular.ttf in Resources */,
 				C29DF96B1CD59F8300E90770 /* Assets.xcassets in Resources */,

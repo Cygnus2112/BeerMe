@@ -30,3 +30,6 @@ playground.xcworkspace
 APIurls
 APIurls.swift
 BeerMe/APIurls.swift
+BeerMe/APIurls
+BeerMe/BeerMe/APIurls.swift
+BeerMe/BeerMe/APIurls
