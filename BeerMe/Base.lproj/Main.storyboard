@@ -28,7 +28,6 @@
             <string>AvenirNextCondensed-Regular</string>
             <string>AvenirNextCondensed-Regular</string>
             <string>AvenirNextCondensed-Regular</string>
-            <string>AvenirNextCondensed-Regular</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -244,7 +243,7 @@
                         <color key="sectionIndexBackgroundColor" red="1" green="1" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="Basic" id="oz1-OM-TBQ">
-                                <rect key="frame" x="0.0" y="92" width="414" height="44"/>
+                                <rect key="frame" x="0.0" y="28" width="414" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="oz1-OM-TBQ" id="CoG-od-AW8">
                                     <rect key="frame" x="0.0" y="0.0" width="381" height="43"/>
@@ -262,10 +261,13 @@
                             <outlet property="delegate" destination="u56-6q-AGF" id="pxL-qb-0XF"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Wish List" id="NHq-c7-HeT" userLabel="Wish List">
-                        <barButtonItem key="backBarButtonItem" id="UFD-JO-X2f">
-                            <color key="tintColor" red="1" green="1" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
-                        </barButtonItem>
+                    <navigationItem key="navigationItem" id="NHq-c7-HeT" userLabel="Wish List">
+                        <nil key="title"/>
+                        <button key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="tuw-4Z-o4e">
+                            <rect key="frame" x="113" y="5" width="188" height="35"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" image="BeerMeLogo-mini"/>
+                        </button>
                         <barButtonItem key="rightBarButtonItem" image="ic_search" id="RKh-ag-O2z">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
@@ -318,10 +320,10 @@
             </objects>
             <point key="canvasLocation" x="1050" y="2246"/>
         </scene>
-        <!--Single Favorite-->
+        <!--Beer Detail View Controller-->
         <scene sceneID="aVn-7O-Pyf">
             <objects>
-                <viewController id="Kai-Go-kto" userLabel="Single Favorite" customClass="BeerDetailViewController" customModule="BeerMe" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Kai-Go-kto" customClass="BeerDetailViewController" customModule="BeerMe" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="lK2-Xh-K3V">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -373,6 +375,13 @@
                         <color key="backgroundColor" red="1" green="1" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <navigationItem key="navigationItem" id="63f-q1-kT7">
+                        <nil key="title"/>
+                        <barButtonItem key="backBarButtonItem" title=" " id="dT5-CG-Ech"/>
+                        <button key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="6Ja-sl-UkC">
+                            <rect key="frame" x="113" y="5" width="188" height="35"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" image="BeerMeLogo-mini"/>
+                        </button>
                         <barButtonItem key="rightBarButtonItem" image="ic_search" id="ZJM-uR-cay">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
@@ -415,10 +424,10 @@
             </objects>
             <point key="canvasLocation" x="74" y="1320"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Wish List Nav Controller-->
         <scene sceneID="uTm-fp-SYS">
             <objects>
-                <navigationController id="toA-GE-nw8" sceneMemberID="viewController">
+                <navigationController id="toA-GE-nw8" userLabel="Wish List Nav Controller" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="6fh-1H-x9a"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="gFB-gG-ReE">
@@ -500,17 +509,20 @@
                                     <action selector="loadBeers:" destination="DnG-fW-A9N" eventType="touchUpInside" id="WnK-EC-rd1"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What are you thirsty for?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="NRh-ha-o1D">
-                                <rect key="frame" x="70" y="81" width="274" height="61"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="AvenirNextCondensed-Regular" family="Avenir Next Condensed" pointSize="30"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="thirsty-250" id="KQw-jJ-Tzg">
+                                <rect key="frame" x="82" y="98" width="250" height="34"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="ceX-MP-O5H">
+                        <nil key="title"/>
+                        <button key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="E51-sP-qG4">
+                            <rect key="frame" x="113" y="5" width="188" height="35"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" image="BeerMeLogo-mini"/>
+                        </button>
                         <barButtonItem key="rightBarButtonItem" image="ic_favorite_border_white" id="vmX-O4-Pz5">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
@@ -538,9 +550,12 @@
                         <color key="backgroundColor" red="1" green="1" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <navigationItem key="navigationItem" id="a3O-zJ-oiJ">
-                        <barButtonItem key="backBarButtonItem" image="ic_arrow_back" id="ZDb-UL-Rx1">
-                            <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                        </barButtonItem>
+                        <nil key="title"/>
+                        <button key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="HDv-dv-CaB">
+                            <rect key="frame" x="113" y="5" width="188" height="35"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" image="BeerMeLogo-mini"/>
+                        </button>
                         <barButtonItem key="rightBarButtonItem" image="ic_favorite_border_white" id="aCZ-bZ-H7R">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
@@ -604,20 +619,21 @@
     <resources>
         <image name="Ale-125" width="108" height="254"/>
         <image name="BeerMeLogo-400" width="400" height="112"/>
+        <image name="BeerMeLogo-mini" width="134" height="35"/>
         <image name="Lager-125" width="108" height="252"/>
         <image name="Pilsner-125" width="125" height="247"/>
         <image name="Stout-125" width="108" height="252"/>
         <image name="beer-pint-350" width="350" height="492"/>
-        <image name="ic_arrow_back" width="24" height="24"/>
         <image name="ic_favorite" width="24" height="24"/>
         <image name="ic_favorite_border_white" width="24" height="24"/>
         <image name="ic_search" width="24" height="24"/>
         <image name="pub-1000" width="1000" height="667"/>
         <image name="pub_image_blur_small" width="631" height="667"/>
+        <image name="thirsty-250" width="250" height="34"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="iGL-2E-zkl"/>
         <segue reference="pPt-PT-nE8"/>
+        <segue reference="2wn-5y-zxe"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
 </document>

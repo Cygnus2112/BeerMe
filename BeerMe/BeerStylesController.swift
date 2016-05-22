@@ -206,8 +206,14 @@ class BeerStylesController: UIViewController {
         super.viewDidLoad()
         
         bgColor.frame = self.view.bounds
+        // light gold background:
         let color1 = UIColor(red:1.00, green:1.00, blue:0.80, alpha:1.0)
         let color2 = UIColor(red:1.00, green:0.80, blue:0.40, alpha:1.0)
+        
+        //light gray background:
+//        let color1 = UIColor(red: 0.902, green: 0.9176, blue: 0.898, alpha: 1.0)
+//        let color2 = UIColor(red: 0.902, green: 0.9176, blue: 0.898, alpha: 1.0)
+       
         bgColor.colors = [color2.CGColor, color1.CGColor]
         view.layer.insertSublayer(bgColor, atIndex: 0)
     

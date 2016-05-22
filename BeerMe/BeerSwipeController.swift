@@ -30,7 +30,7 @@ class BeerSwipeController: UIViewController, MDCSwipeToChooseDelegate {
     var dislikesToAdd : [AnyObject] = []
     
     let ChooseBeerButtonHorizontalPadding:CGFloat = 40.0
-    let ChooseBeerButtonVerticalPadding:CGFloat = 60.0
+    let ChooseBeerButtonVerticalPadding:CGFloat = 35.0
     var currentBeer:Beer!
     var frontCardView:ChooseBeerView!
     var backCardView:ChooseBeerView!
@@ -52,8 +52,14 @@ class BeerSwipeController: UIViewController, MDCSwipeToChooseDelegate {
         super.viewDidLoad()
         
         bgColor.frame = self.view.bounds
+        // light gray background:
+//        let color1 = UIColor(red:0.93, green:0.95, blue:0.93, alpha:1.0)
+//        let color2 = UIColor(red:0.93, green:0.95, blue:0.93, alpha:1.0)
+        
+        // light gold background:
         let color1 = UIColor(red:1.00, green:1.00, blue:0.80, alpha:1.0)
         let color2 = UIColor(red:1.00, green:0.80, blue:0.40, alpha:1.0)
+        
         bgColor.colors = [color2.CGColor, color1.CGColor]
         view.layer.insertSublayer(bgColor, atIndex: 0)
        
@@ -66,6 +72,8 @@ class BeerSwipeController: UIViewController, MDCSwipeToChooseDelegate {
         self.backCardView.layer.cornerRadius = 5.0
         self.backCardView.layer.masksToBounds = true
         self.backCardView.layer.borderWidth = 2
+        
+        
         
         self.view.insertSubview(self.backCardView, belowSubview: self.frontCardView)
         
@@ -158,8 +166,7 @@ class BeerSwipeController: UIViewController, MDCSwipeToChooseDelegate {
 
         if(backCardView != nil){
             self.backCardView.alpha = 0.0
-            
-//asdfaoeoeoeoeoeoeoeoe
+
             self.backCardView.layer.borderColor = UIColor.blackColor().CGColor
             self.backCardView.layer.cornerRadius = 5.0
             self.backCardView.layer.masksToBounds = true
@@ -267,10 +274,24 @@ class BeerSwipeController: UIViewController, MDCSwipeToChooseDelegate {
     }
     func constructNopeButton() -> Void{
         let button:UIButton =  UIButton(type: UIButtonType.System)
-        let image:UIImage = UIImage(named:"NoThanks2")!
-        button.frame = CGRectMake(ChooseBeerButtonHorizontalPadding, CGRectGetMaxY(self.frontCardView.frame) + ChooseBeerButtonVerticalPadding, image.size.width, image.size.height)
+//        let image:UIImage = UIImage(named:"NoThanks2")!
+         let image:UIImage = UIImage(named:"ic_thumb_down_3x")!
+        button.frame = CGRectMake(ChooseBeerButtonHorizontalPadding+30, CGRectGetMaxY(self.frontCardView.frame) + ChooseBeerButtonVerticalPadding, image.size.width+20, image.size.height+20)
         button.setImage(image, forState: UIControlState.Normal)
         button.tintColor = UIColor.redColor()
+        
+        button.backgroundColor = UIColor.whiteColor()
+        
+        button.layer.cornerRadius = 5
+       // button.layer.borderWidth = 1
+       // button.layer.borderColor = UIColor.grayColor().CGColor
+        
+        button.layer.shadowColor = UIColor.grayColor().CGColor
+        button.layer.shadowOffset = CGSizeMake(0, 0)
+        button.layer.shadowRadius = 5
+        button.layer.shadowOpacity = 0.5
+        
+        
        // button.tintColor = UIColor(red: 247.0/255.0, green: 91.0/255.0, blue: 37.0/255.0, alpha: 1.0)
         button.addTarget(self, action: #selector(BeerSwipeController.nopeFrontCardView), forControlEvents: UIControlEvents.TouchUpInside)
         self.view.addSubview(button)
@@ -278,10 +299,26 @@ class BeerSwipeController: UIViewController, MDCSwipeToChooseDelegate {
     
     func constructLikedButton() -> Void{
         let button:UIButton = UIButton(type: UIButtonType.System)
-        let image:UIImage = UIImage(named:"BeerMeLogo-mini")!
-        button.frame = CGRectMake(CGRectGetMaxX(self.view.frame) - image.size.width - (ChooseBeerButtonHorizontalPadding+2), CGRectGetMaxY(self.frontCardView.frame) + (ChooseBeerButtonVerticalPadding+1), image.size.width, image.size.height)
+//        let image:UIImage = UIImage(named:"BeerMeLogo-mini")!
+        let image:UIImage = UIImage(named:"ic_thumb_up_3x")!
+     //   button.frame = CGRectMake(CGRectGetMaxX(self.view.frame) - image.size.width - (ChooseBeerButtonHorizontalPadding+2), CGRectGetMaxY(self.frontCardView.frame) + (ChooseBeerButtonVerticalPadding+1), image.size.width, image.size.height)
+        button.frame = CGRectMake(CGRectGetMaxX(self.view.frame) - image.size.width - (ChooseBeerButtonHorizontalPadding + 50), CGRectGetMaxY(self.frontCardView.frame) + (ChooseBeerButtonVerticalPadding), image.size.width+20, image.size.height+20)
         button.setImage(image, forState:UIControlState.Normal)
         button.tintColor = UIColor(red:1.00, green:0.62, blue:0.00, alpha:1.0)
+        
+        
+        button.backgroundColor = UIColor.whiteColor()
+        button.layer.cornerRadius = 5
+        
+//        button.layer.borderWidth = 1
+//        button.layer.borderColor = UIColor.grayColor().CGColor
+        
+        button.layer.shadowColor = UIColor.grayColor().CGColor
+        button.layer.shadowOffset = CGSizeMake(0, 0)
+        button.layer.shadowRadius = 5
+        button.layer.shadowOpacity = 0.5
+        
+        
         //button.tintColor = UIColor(red: 29.0/255.0, green: 245.0/255.0, blue: 106.0/255.0, alpha: 1.0)
         button.addTarget(self, action: #selector(BeerSwipeController.likeFrontCardView), forControlEvents: UIControlEvents.TouchUpInside)
         self.view.addSubview(button)
@@ -297,7 +334,7 @@ class BeerSwipeController: UIViewController, MDCSwipeToChooseDelegate {
     var addedLabel:UILabel!
     func showAdded() {
         addedLabel = UILabel(frame: CGRectMake(0, 0, 200, 30))
-        addedLabel.center = CGPointMake(210, 675)
+        addedLabel.center = CGPointMake(210, 700)
         addedLabel.textAlignment = NSTextAlignment.Center
         addedLabel.text = "Added to Wish List!"
         addedLabel.textColor = UIColor.blueColor()

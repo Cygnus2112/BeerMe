@@ -45,18 +45,27 @@ class BeerDetailViewController : UIViewController, UINavigationControllerDelegat
     
     @IBAction func toggleWishList(sender: AnyObject) {
         if self.isInWishList == "true" {
-            
             self.wishList = self.wishList.filter { $0 != self.currentBeer }
-            
             let emptyHeart:UIImage = UIImage(named:"ic_favorite_border_3x")!
-            wishListButton.setImage(emptyHeart, forState: UIControlState.Normal)
+            
+            let tintedHeart = emptyHeart.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
+            
+            wishListButton.tintColor = UIColor(red:1.00, green:0.62, blue:0.00, alpha:1.0)
+            
+            wishListButton.setImage(tintedHeart, forState: UIControlState.Normal)
             self.dislikesToAdd = [beerObject]
             self.wishListToRemove = [beerObject]
             self.wishListLabel.text = "Add to Wish List"
             self.isInWishList = "false"
         } else {
             let filledHeart:UIImage = UIImage(named:"ic_favorite_filled_3x")!
-            wishListButton.setImage(filledHeart, forState: UIControlState.Normal)
+            
+            let tintedFilled = filledHeart.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
+            
+            wishListButton.tintColor = UIColor(red:1.00, green:0.62, blue:0.00, alpha:1.0)
+            
+            
+            wishListButton.setImage(tintedFilled, forState: UIControlState.Normal)
             
             self.wishList.append(self.currentBeer)
             
@@ -104,20 +113,65 @@ class BeerDetailViewController : UIViewController, UINavigationControllerDelegat
         
         if self.presentingSegue == "FavoriteSegue" {
             let image:UIImage = UIImage(named:"ic_favorite_filled_3x")!
-            wishListButton.setImage(image, forState: UIControlState.Normal)
+            
+            let tintedImage = image.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
+            
+            wishListButton.setImage(tintedImage, forState: UIControlState.Normal)
             self.isInWishList = "true"
             self.wishListLabel.text = "Remove from Wish List"
+            
+            wishListButton.tintColor = UIColor(red:1.00, green:0.62, blue:0.00, alpha:1.0)
+            
+           // wishListButton.backgroundColor = UIColor(red:0.93, green:0.95, blue:0.93, alpha:1.0)
+            wishListButton.backgroundColor = UIColor.whiteColor()
+            wishListButton.layer.cornerRadius = 5
+            wishListButton.layer.shadowColor = UIColor.grayColor().CGColor
+            wishListButton.layer.shadowOffset = CGSizeMake(0, 0)
+            wishListButton.layer.shadowRadius = 5
+            wishListButton.layer.shadowOpacity = 0.5
         } else {
             let image:UIImage = UIImage(named:"ic_favorite_border_3x")!
-            wishListButton.setImage(image, forState: UIControlState.Normal)
+            
+            let tintedImage = image.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
+            
+            wishListButton.setImage(tintedImage, forState: UIControlState.Normal)
             self.wishListLabel.text = "Add to Wish List"
             self.isInWishList = "false"
+            
+            wishListButton.tintColor = UIColor(red:1.00, green:0.62, blue:0.00, alpha:1.0)
+            
+//            wishListButton.backgroundColor = UIColor(red:0.93, green:0.95, blue:0.93, alpha:1.0)
+            wishListButton.backgroundColor = UIColor.whiteColor()
+            wishListButton.layer.cornerRadius = 5
+            wishListButton.layer.shadowColor = UIColor.grayColor().CGColor
+            wishListButton.layer.shadowOffset = CGSizeMake(0, 0)
+            wishListButton.layer.shadowRadius = 5
+            wishListButton.layer.shadowOpacity = 0.5
         }
         
         let image2:UIImage = UIImage(named:"ic_shopping_cart_3x")!
-        shoppingCart.setImage(image2, forState: UIControlState.Normal)
+        
+        let tintedImage2 = image2.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
+
+        shoppingCart.setImage(tintedImage2, forState: .Normal)
+      //  shoppingCart.tintColor = UIColor(red:0.40, green:0.20, blue:0.00, alpha:1.0)
+        shoppingCart.tintColor = UIColor(red:1.00, green:0.62, blue:0.00, alpha:1.0)
+        shoppingCart.backgroundColor = UIColor.whiteColor()
+        //shoppingCart.backgroundColor = UIColor(red:0.93, green:0.95, blue:0.93, alpha:1.0)
+        shoppingCart.layer.cornerRadius = 5
+        
+        //        button.layer.borderWidth = 1
+        //        button.layer.borderColor = UIColor.grayColor().CGColor
+        
+       // shoppingCart.layer.shadowColor = UIColor.grayColor().CGColor
+        
+        shoppingCart.layer.shadowColor = UIColor.grayColor().CGColor
+        shoppingCart.layer.shadowOffset = CGSizeMake(0, 0)
+        shoppingCart.layer.shadowRadius = 5
+        shoppingCart.layer.shadowOpacity = 0.5
         
         
+        // shoppingCart.setImage(image2, forState: UIControlState.Normal)
     }
     
     override func viewWillDisappear(animated: Bool){
