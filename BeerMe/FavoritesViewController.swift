@@ -24,6 +24,9 @@ class FavoritesViewController : UITableViewController {
         let color2 = UIColor(red:1.00, green:0.80, blue:0.40, alpha:1.0)
         bgColor.colors = [color2.CGColor, color1.CGColor]
         view.layer.insertSublayer(bgColor, atIndex: 0)
+        
+        
+        
     }
     
     override func viewWillAppear(animated: Bool) {

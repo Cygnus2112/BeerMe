@@ -26,11 +26,11 @@ BeerMe! uses the amazing BreweryDB API for all of its beer data.
 
 Log in, choose a style, and swipe through a continuously reloading assortment of beers chosen at random. 
 
-![swipe_views](assets/swipe_views.png)
+![swipe_views](assets/styles_swipe.png)
 
 Swipe right and the beer is added to your Wish List. Swipe left and you'll never see that beer again. (This might be tweaked in a future version. It seems a tad extreme.)
 
-![wishlist_views](assets/wishlist_views.png)
+![wishlist_views](assets/wishlist_detail.png)
 
 ####TODO:
 
