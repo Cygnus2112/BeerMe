@@ -39,8 +39,6 @@ class SignupViewController : UIViewController {
             responseSerializer: Request.JSONResponseSerializer(options: .AllowFragments),
             completionHandler: { response in
                 let resp = JSON(response.result.value!)
-                //print("token:")
-                //print(resp)
                 
                 if resp["ERROR"] != nil {
                     dispatch_async(dispatch_get_main_queue()) {

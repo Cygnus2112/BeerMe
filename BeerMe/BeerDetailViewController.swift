@@ -47,35 +47,28 @@ class BeerDetailViewController : UIViewController, UINavigationControllerDelegat
         if self.isInWishList == "true" {
             self.wishList = self.wishList.filter { $0 != self.currentBeer }
             let emptyHeart:UIImage = UIImage(named:"ic_favorite_border_3x")!
-            
             let tintedHeart = emptyHeart.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
-            
             wishListButton.tintColor = UIColor(red:1.00, green:0.62, blue:0.00, alpha:1.0)
-            
             wishListButton.setImage(tintedHeart, forState: UIControlState.Normal)
+            
             self.dislikesToAdd = [beerObject]
             self.wishListToRemove = [beerObject]
             self.wishListLabel.text = "Add to Wish List"
             self.isInWishList = "false"
         } else {
             let filledHeart:UIImage = UIImage(named:"ic_favorite_filled_3x")!
-            
             let tintedFilled = filledHeart.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
-            
             wishListButton.tintColor = UIColor(red:1.00, green:0.62, blue:0.00, alpha:1.0)
-            
-            
             wishListButton.setImage(tintedFilled, forState: UIControlState.Normal)
             
             self.wishList.append(self.currentBeer)
-            
             self.wishListToRemove = []
             self.dislikesToAdd = []
             self.wishListLabel.text = "Remove from Wish List"
             self.isInWishList = "true"
         }
-       
     }
+    
     //TODO:  present map of places to buy, etc.
     
     func navigationController(navigationController: UINavigationController, willShowViewController viewController: UIViewController, animated: Bool) {
@@ -113,7 +106,6 @@ class BeerDetailViewController : UIViewController, UINavigationControllerDelegat
         
         if self.presentingSegue == "FavoriteSegue" {
             let image:UIImage = UIImage(named:"ic_favorite_filled_3x")!
-            
             let tintedImage = image.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
             
             wishListButton.setImage(tintedImage, forState: UIControlState.Normal)
@@ -131,7 +123,6 @@ class BeerDetailViewController : UIViewController, UINavigationControllerDelegat
             wishListButton.layer.shadowOpacity = 0.5
         } else {
             let image:UIImage = UIImage(named:"ic_favorite_border_3x")!
-            
             let tintedImage = image.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
             
             wishListButton.setImage(tintedImage, forState: UIControlState.Normal)
@@ -163,22 +154,16 @@ class BeerDetailViewController : UIViewController, UINavigationControllerDelegat
         //        button.layer.borderWidth = 1
         //        button.layer.borderColor = UIColor.grayColor().CGColor
         
-       // shoppingCart.layer.shadowColor = UIColor.grayColor().CGColor
-        
         shoppingCart.layer.shadowColor = UIColor.grayColor().CGColor
         shoppingCart.layer.shadowOffset = CGSizeMake(0, 0)
         shoppingCart.layer.shadowRadius = 5
         shoppingCart.layer.shadowOpacity = 0.5
-        
-        
-        // shoppingCart.setImage(image2, forState: UIControlState.Normal)
     }
     
     override func viewWillDisappear(animated: Bool){
         super.viewWillDisappear(animated)
         
         if self.wishListToRemove.isEmpty == false {
-        
             let parameters = [
                 "username": self.username,
                 "wishlist": self.wishListToRemove as AnyObject,
@@ -186,7 +171,6 @@ class BeerDetailViewController : UIViewController, UINavigationControllerDelegat
             ]
         
             let headers = ["x-access-token" : String(NSUserDefaults.standardUserDefaults().objectForKey("token")!)]
-        
             let queue = dispatch_queue_create("com.tomleupp.manager-response-queue", DISPATCH_QUEUE_CONCURRENT)
         
            //     let request = Alamofire.request(.PUT, "http://localhost:8080/wishlist", parameters: parameters, headers: headers, encoding: .JSON)
@@ -198,7 +182,6 @@ class BeerDetailViewController : UIViewController, UINavigationControllerDelegat
                 completionHandler: { response in
                 
                     let json = JSON(response.result.value!)
-                
                     print(json)
                 
                     dispatch_async(dispatch_get_main_queue()) {
@@ -207,5 +190,4 @@ class BeerDetailViewController : UIViewController, UINavigationControllerDelegat
             )
         }
     }
-    
 }

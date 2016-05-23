@@ -18,15 +18,11 @@ class FavoritesViewController : UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //let bgColor = CAGradientLayer()
         bgColor.frame = self.view.bounds
         let color1 = UIColor(red:1.00, green:1.00, blue:0.80, alpha:1.0)
         let color2 = UIColor(red:1.00, green:0.80, blue:0.40, alpha:1.0)
         bgColor.colors = [color2.CGColor, color1.CGColor]
-        view.layer.insertSublayer(bgColor, atIndex: 0)
-        
-        
-        
+        view.layer.insertSublayer(bgColor, atIndex: 0)     
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -46,7 +42,6 @@ class FavoritesViewController : UITableViewController {
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         return wishList.count
     }
     
@@ -56,18 +51,11 @@ class FavoritesViewController : UITableViewController {
         let beer = wishList[indexPath.row]
         cell.textLabel?.text = beer.Name as String
         cell.textLabel?.font = UIFont(name: "Avenir Next Condensed", size: 20)
-      //  cell.backgroundColor = UIColor.cyanColor()
-//        bgColor2.frame = cell.bounds
-//        let color1 = UIColor(red:1.00, green:1.00, blue:0.80, alpha:1.0)
-//        let color2 = UIColor(red:1.00, green:0.80, blue:0.40, alpha:1.0)
-//        bgColor2.colors = [color1.CGColor, color2.CGColor]
-      
-       // cell.layer.insertSublayer(bgColor2, atIndex: 0)
         
-        cell.layer.borderColor = UIColor.blackColor().CGColor
+        cell.layer.borderColor = UIColor.grayColor().CGColor
         cell.layer.cornerRadius = 2.0
-                cell.layer.masksToBounds = true
-                cell.layer.borderWidth = 1
+        cell.layer.masksToBounds = true
+        cell.layer.borderWidth = 1
         
         return cell
     }
@@ -89,13 +77,10 @@ class FavoritesViewController : UITableViewController {
                 dest.id = id as String
                 dest.style = style as String
                 dest.presentingSegue = "FavoriteSegue"
-                
                 dest.currentBeer = beer
                 dest.wishList = self.wishList
-                
             }
         }
-        
     }
     
     override func didReceiveMemoryWarning() {

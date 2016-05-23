@@ -19,11 +19,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         application.statusBarStyle = .LightContent
         
-        //UINavigationBar
-        //UIStatusBar.appearance().barTintColor = UIColor.greenColor()
-        
-        //UIApplication.sharedApplication().statusBarStyle = .LightContent
-        
         let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let user = NSUserDefaults.standardUserDefaults().objectForKey("username")
         
@@ -60,22 +55,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
     
-    // MARK: - Core Data stack
-    
-    lazy var applicationDocumentsDirectory: NSURL = {
-        // The directory the application uses to store the Core Data store file. This code uses a directory named "MDCSwipeToChoose.SwiftLikedOrNope" in the application's documents Application Support directory.
-        let urls = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
-        return urls[urls.count-1]
-    }()
-    
-    lazy var managedObjectModel: NSManagedObjectModel = {
-        // The managed object model for the application. This property is not optional. It is a fatal error for the application not to be able to find and load its model.
-        let modelURL = NSBundle.mainBundle().URLForResource("BeerMe", withExtension: "momd")!
-        
-        print(modelURL)
-        
-        return NSManagedObjectModel(contentsOfURL: modelURL)!
-    }()
+//    // MARK: - Core Data stack
+//    
+//    lazy var applicationDocumentsDirectory: NSURL = {
+//        // The directory the application uses to store the Core Data store file. This code uses a directory named "MDCSwipeToChoose.SwiftLikedOrNope" in the application's documents Application Support directory.
+//        let urls = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
+//        print("urls")
+//        print(urls)
+//        return urls[urls.count-1]
+//    }()
+//    
+//    lazy var managedObjectModel: NSManagedObjectModel = {
+//        // The managed object model for the application. This property is not optional. It is a fatal error for the application not to be able to find and load its model.
+//        let modelURL = NSBundle.mainBundle().URLForResource("BeerMe", withExtension: "momd")!
+//        
+//        print(modelURL)
+//        
+//        return NSManagedObjectModel(contentsOfURL: modelURL)!
+//    }()
     
 }
 
