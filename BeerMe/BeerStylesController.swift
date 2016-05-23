@@ -46,11 +46,9 @@ class BeerStylesController: UIViewController {
         presentViewController(loadingView, animated: true, completion: nil)
         
         let parameters = ["username": NSUserDefaults.standardUserDefaults().objectForKey("username")!, "style": self.style]
-        
         let queue = dispatch_queue_create("com.tomleupp.manager-response-queue", DISPATCH_QUEUE_CONCURRENT)
         
        // let request = Alamofire.request(.GET, "http://localhost:8080/fetchbeers", parameters: parameters)
-        
         let request = Alamofire.request(.GET, APIurls().fetchbeers, parameters: parameters)
         
         request.response(
@@ -89,11 +87,8 @@ class BeerStylesController: UIViewController {
                                 }
                             }
                         )
-                    
                 }
-                
                 dispatch_async(dispatch_get_main_queue()) {
-                    
                     
                 }
             }
@@ -116,7 +111,6 @@ class BeerStylesController: UIViewController {
         loadingView.view.addSubview(loadingIndicator)
         presentViewController(loadingView, animated: true, completion: nil)
         
- 
         let username = NSUserDefaults.standardUserDefaults().objectForKey("username")!
         let parameters = ["username": username]
         let headers = ["x-access-token" : String(NSUserDefaults.standardUserDefaults().objectForKey("token")!)]
@@ -149,7 +143,6 @@ class BeerStylesController: UIViewController {
                 let json = JSON(resp)
                 
                 for (key,subJson):(String, JSON) in json {
-                    
                     var label : UIImage!
                     let labelUrl = String(json[key]["label"])
                     let queue2 = dispatch_queue_create("com.tomleupp.manager-response-queue", DISPATCH_QUEUE_CONCURRENT)
@@ -165,6 +158,11 @@ class BeerStylesController: UIViewController {
                             let beer = Beer(name: String(json[key]["name"]), labelUrl: labelUrl, label: label, id: key, style: String(json[key]["style"]))
                             
                             self.wishList.append(beer)
+                            
+                            print("json.count")
+                            print(json.count)
+                            print("self.wishlist.count")
+                            print(self.wishList.count)
                             
                             dispatch_async(dispatch_get_main_queue()) {
                                 if self.wishList.count == json.count {
@@ -216,9 +214,6 @@ class BeerStylesController: UIViewController {
        
         bgColor.colors = [color2.CGColor, color1.CGColor]
         view.layer.insertSublayer(bgColor, atIndex: 0)
-    
-        
-        // Do any additional setup after loading the view, typically from a nib.
     }
     
     override func didReceiveMemoryWarning() {

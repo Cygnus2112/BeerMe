@@ -13,7 +13,7 @@ import Alamofire
 import AlamofireImage
 import SwiftyJSON
 
-// Code for Tinder-style swiping. Using MDCSwipeToChoose CocoaPod.
+// Code for Tinder-style swiping. Using MDCSwipeToChoose plugin.
 
 class BeerSwipeController: UIViewController, MDCSwipeToChooseDelegate {
     let bgColor = CAGradientLayer()
@@ -73,13 +73,10 @@ class BeerSwipeController: UIViewController, MDCSwipeToChooseDelegate {
         self.backCardView.layer.masksToBounds = true
         self.backCardView.layer.borderWidth = 2
         
-        
-        
         self.view.insertSubview(self.backCardView, belowSubview: self.frontCardView)
         
         constructNopeButton()
         constructLikedButton()
-        
     }
     
     override func viewWillDisappear(animated: Bool){
@@ -152,7 +149,6 @@ class BeerSwipeController: UIViewController, MDCSwipeToChooseDelegate {
             beerToAdd["label"] = self.currentBeer.Label as UIImage
             self.wishListWorkaround.append(beerToAdd)
             
-            
             showAdded()
             
             print("You liked: \(self.currentBeer.Name)")
@@ -195,8 +191,6 @@ class BeerSwipeController: UIViewController, MDCSwipeToChooseDelegate {
         
         let options:MDCSwipeToChooseViewOptions = MDCSwipeToChooseViewOptions()
         options.delegate = self
-        //options.threshold = 160.0
-        
         options.onPan = { state -> Void in
             if(self.backCardView != nil){
                 let frame:CGRect = self.frontCardViewFrame()
@@ -215,7 +209,6 @@ class BeerSwipeController: UIViewController, MDCSwipeToChooseDelegate {
             
         //    let request = Alamofire.request(.GET, "http://localhost:8080/fetchbeers", parameters: parameters)
             let request = Alamofire.request(.GET, APIurls().fetchbeers, parameters: parameters)
-            
             
             request.response(
                 queue: queue,
@@ -274,7 +267,6 @@ class BeerSwipeController: UIViewController, MDCSwipeToChooseDelegate {
     }
     func constructNopeButton() -> Void{
         let button:UIButton =  UIButton(type: UIButtonType.System)
-//        let image:UIImage = UIImage(named:"NoThanks2")!
          let image:UIImage = UIImage(named:"ic_thumb_down_3x")!
         button.frame = CGRectMake(ChooseBeerButtonHorizontalPadding+30, CGRectGetMaxY(self.frontCardView.frame) + ChooseBeerButtonVerticalPadding, image.size.width+20, image.size.height+20)
         button.setImage(image, forState: UIControlState.Normal)
@@ -284,42 +276,30 @@ class BeerSwipeController: UIViewController, MDCSwipeToChooseDelegate {
         
         button.layer.cornerRadius = 5
        // button.layer.borderWidth = 1
-       // button.layer.borderColor = UIColor.grayColor().CGColor
-        
         button.layer.shadowColor = UIColor.grayColor().CGColor
         button.layer.shadowOffset = CGSizeMake(0, 0)
         button.layer.shadowRadius = 5
         button.layer.shadowOpacity = 0.5
         
-        
-       // button.tintColor = UIColor(red: 247.0/255.0, green: 91.0/255.0, blue: 37.0/255.0, alpha: 1.0)
         button.addTarget(self, action: #selector(BeerSwipeController.nopeFrontCardView), forControlEvents: UIControlEvents.TouchUpInside)
         self.view.addSubview(button)
     }
     
     func constructLikedButton() -> Void{
         let button:UIButton = UIButton(type: UIButtonType.System)
-//        let image:UIImage = UIImage(named:"BeerMeLogo-mini")!
         let image:UIImage = UIImage(named:"ic_thumb_up_3x")!
      //   button.frame = CGRectMake(CGRectGetMaxX(self.view.frame) - image.size.width - (ChooseBeerButtonHorizontalPadding+2), CGRectGetMaxY(self.frontCardView.frame) + (ChooseBeerButtonVerticalPadding+1), image.size.width, image.size.height)
         button.frame = CGRectMake(CGRectGetMaxX(self.view.frame) - image.size.width - (ChooseBeerButtonHorizontalPadding + 50), CGRectGetMaxY(self.frontCardView.frame) + (ChooseBeerButtonVerticalPadding), image.size.width+20, image.size.height+20)
         button.setImage(image, forState:UIControlState.Normal)
         button.tintColor = UIColor(red:1.00, green:0.62, blue:0.00, alpha:1.0)
-        
-        
         button.backgroundColor = UIColor.whiteColor()
         button.layer.cornerRadius = 5
-        
 //        button.layer.borderWidth = 1
 //        button.layer.borderColor = UIColor.grayColor().CGColor
-        
         button.layer.shadowColor = UIColor.grayColor().CGColor
         button.layer.shadowOffset = CGSizeMake(0, 0)
         button.layer.shadowRadius = 5
         button.layer.shadowOpacity = 0.5
-        
-        
-        //button.tintColor = UIColor(red: 29.0/255.0, green: 245.0/255.0, blue: 106.0/255.0, alpha: 1.0)
         button.addTarget(self, action: #selector(BeerSwipeController.likeFrontCardView), forControlEvents: UIControlEvents.TouchUpInside)
         self.view.addSubview(button)
         
@@ -361,9 +341,7 @@ class BeerSwipeController: UIViewController, MDCSwipeToChooseDelegate {
             self.wishListBeerArrayWorkaround.append(beerObj)
         }
         
-
         // end temporary workaround
-        
         
         let loadingView = UIAlertController(title: nil, message: "Fetching Wish List...", preferredStyle: .Alert)
         
@@ -430,6 +408,11 @@ class BeerSwipeController: UIViewController, MDCSwipeToChooseDelegate {
                             let beer = Beer(name: String(json[key]["name"]), labelUrl: labelUrl, label: label, id: key, style: String(json[key]["style"]))
                             
                             self.wishList.append(beer)
+                            
+                            print("json.count + self.wishListBeerArrayWorkaround.count")
+                            print(json.count + self.wishListBeerArrayWorkaround.count)
+                            print("self.wishlist.count")
+                            print(self.wishList.count)
                             
                             dispatch_async(dispatch_get_main_queue()) {
                                if self.wishList.count == json.count + self.wishListBeerArrayWorkaround.count {

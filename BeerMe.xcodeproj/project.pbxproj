@@ -84,13 +84,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		C213B19F1CEE658B0066DA57 /* Utils */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Utils;
-			sourceTree = "<group>";
-		};
 		C29DF9571CD59F8300E90770 = {
 			isa = PBXGroup;
 			children = (
@@ -112,18 +105,17 @@
 		C29DF9621CD59F8300E90770 /* BeerMe */ = {
 			isa = PBXGroup;
 			children = (
-				C213B1971CED5DBD0066DA57 /* APIurls.swift */,
-				C213B19F1CEE658B0066DA57 /* Utils */,
-				C2A194191CD91C1B00B69249 /* Views */,
-				C2A194181CD91C1000B69249 /* Controllers */,
-				C2A194171CD91BE600B69249 /* Models */,
 				C29DF9631CD59F8300E90770 /* AppDelegate.swift */,
+				C213B1971CED5DBD0066DA57 /* APIurls.swift */,
 				C29DF9671CD59F8300E90770 /* Main.storyboard */,
 				C2ED08FE1CE12C170040B1B5 /* LaunchScreen.storyboard */,
-				C235CAA01CE237260037CADB /* AvenirNextCondensed-Regular.ttf */,
+				C2A194181CD91C1000B69249 /* Controllers */,
+				C2A194171CD91BE600B69249 /* Models */,
+				C2A194191CD91C1B00B69249 /* Views */,
 				C29DF96A1CD59F8300E90770 /* Assets.xcassets */,
 				C29DF96F1CD59F8300E90770 /* Info.plist */,
 				C2A194111CD83D0000B69249 /* BeerMe-Bridging-Header.h */,
+				C235CAA01CE237260037CADB /* AvenirNextCondensed-Regular.ttf */,
 			);
 			path = BeerMe;
 			sourceTree = "<group>";

@@ -48,20 +48,16 @@ class LoginViewController: UIViewController {
                     let token = JSON(response.result.value!)
                     
                     dispatch_async(dispatch_get_main_queue()) {
-                        
                         NSUserDefaults.standardUserDefaults().setObject(self.username.text!, forKey: "username")
                         NSUserDefaults.standardUserDefaults().setObject(self.password.text!, forKey: "password")
                         NSUserDefaults.standardUserDefaults().setObject(String(token["token"]), forKey: "token")
-                        
                         print("login successful")
-                        
                         self.performSegueWithIdentifier("LoginToStylesSegue", sender: nil)
                     }
                 }
             )
         }
     }
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()

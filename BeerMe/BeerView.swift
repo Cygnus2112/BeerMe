@@ -18,11 +18,9 @@ class ChooseBeerView: MDCSwipeToChooseView {
     var nameLabel: UILabel!
     
     init(frame: CGRect, beer: Beer, options: MDCSwipeToChooseViewOptions) {
-        
         super.init(frame: frame, options: options)
         
         self.beer = beer
-        
         if let image = self.beer.Label {
             self.imageView.image = image
         }
@@ -47,29 +45,11 @@ class ChooseBeerView: MDCSwipeToChooseView {
         super.init(coder: aDecoder)!
     }
     
-    func constructInformationView() -> Void{
-    /*    let bottomHeight:CGFloat = 60.0
-        //let bottomHeight:CGFloat = 200.0
-        let bottomFrame:CGRect = CGRectMake(0,
-                                            (CGRectGetHeight(self.bounds) + bottomHeight),
-                                            CGRectGetWidth(self.bounds),
-                                            bottomHeight);
-        self.informationView = UIView(frame:bottomFrame)
-       // self.informationView.backgroundColor = UIColor.whiteColor()
-       // self.informationView.clipsToBounds = true
-        self.informationView.autoresizingMask = [UIViewAutoresizing.FlexibleWidth, UIViewAutoresizing.FlexibleTopMargin]
-        self.addSubview(self.informationView)    */
-        constructNameLabel()
-    }
-    
     func constructNameLabel() -> Void{
         let leftPadding:CGFloat = 0.0
         //let topPadding:CGFloat = 17.0
         let topPadding:CGFloat = 370.0
-        //let topPadding:CGFloat = 30.0
-//        let frame:CGRect = CGRectMake(leftPadding,
-//                                      topPadding,floor(CGRectGetWidth(self.informationView.frame)/2),
-//                                      CGRectGetHeight(self.informationView.frame) - topPadding)
+    
         let w:CGFloat = 374.0
         let h:CGFloat = 70.0
         let frame:CGRect = CGRectMake(leftPadding,
@@ -87,8 +67,22 @@ class ChooseBeerView: MDCSwipeToChooseView {
         self.nameLabel.layer.masksToBounds = true
         self.nameLabel.layer.borderWidth = 2
         
-       // self.informationView.addSubview(self.nameLabel)
         self.addSubview(self.nameLabel)
+    }
+    
+    func constructInformationView() -> Void{
+        /*    let bottomHeight:CGFloat = 60.0
+         //let bottomHeight:CGFloat = 200.0
+         let bottomFrame:CGRect = CGRectMake(0,
+         (CGRectGetHeight(self.bounds) + bottomHeight),
+         CGRectGetWidth(self.bounds),
+         bottomHeight);
+         self.informationView = UIView(frame:bottomFrame)
+         // self.informationView.backgroundColor = UIColor.whiteColor()
+         // self.informationView.clipsToBounds = true
+         self.informationView.autoresizingMask = [UIViewAutoresizing.FlexibleWidth, UIViewAutoresizing.FlexibleTopMargin]
+         self.addSubview(self.informationView)    */
+        constructNameLabel()
     }
 
 }
