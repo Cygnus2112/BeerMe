@@ -65,12 +65,37 @@ router.post('/login',function(req, res, next) {
 	});  			
 });
 
+// router.get('/getbeerlabel', function(req,res){
+// 	var url = req.query.labelurl;
+// 	request.get(url, function(err, response, body) { 
+//         if(err){
+//             console.log(err);
+//         }
+//        	res.send(body);
+//     });
+// })
+
 router.get('/fetchbeers', function(req,res){
 	var username = req.query.username;
 	var style = req.query.style;
 
-	var wishList = {} || req.query.wishList;
-	var dislikes = {} || req.query.dislikes;
+	var wishList = {};
+	var dislikes = {};
+	db.User.findOne({username:username},function(err,user){
+		if(err){
+			console.log('error finding user in DB');
+			res.send(err);
+		}
+		wishList = {} || user.wishList;
+		dislikes = {} || req.query.dislikes;
+	})
+
+	// ------------------
+
+	
+
+	//var wishList = {} || req.query.wishList;
+	//var dislikes = {} || req.query.dislikes;
 
 	var url = "http://api.brewerydb.com/v2/beers?key="+breweryKey+"&availableId=1&hasLabels=y&order=random&randomCount=10";
 	
@@ -152,6 +177,20 @@ router.get('/wishlist', auth.checkUser, function(req,res){
 		res.json(wishlist)
 	})
 })
+
+// router.get('/wishlist', auth.checkUser, function(req,res){
+// 	var username = req.query.username;
+// 	var wishlist;
+
+// 	db.User.findOne({username:username},function(err,user){
+// 		if(err){
+// 			console.log('error finding user in DB');
+// 			res.send(err);
+// 		}
+// 		wishlist = user.wishList;
+// 		res.json(wishlist)
+// 	})
+// })
 
 router.post('/wishlist', auth.checkUser, function(req,res){
 	var username = req.body.username;
