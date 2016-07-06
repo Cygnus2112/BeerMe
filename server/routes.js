@@ -92,11 +92,6 @@ router.get('/fetchbeers', function(req,res){
 
 	// ------------------
 
-	
-
-	//var wishList = {} || req.query.wishList;
-	//var dislikes = {} || req.query.dislikes;
-
 	var url = "http://api.brewerydb.com/v2/beers?key="+breweryKey+"&availableId=1&hasLabels=y&order=random&randomCount=10";
 	
 	if(style === "Pilsner") {
@@ -126,14 +121,18 @@ router.get('/fetchbeers', function(req,res){
 			return new Promise(function(resolve, reject) {     		
         		request.get(url, function(err, response, body) { 
         			if(err){
-            			console.log(err);
+            			console.log("error in fetchbeers: ", err);
         			}
         			console.log("---------------------");       
 
        // TODO separate out into sep file:
         			var data = JSON.parse(body);
 
-        			if(data.data[0].style){
+        			if(data.errorMessage) {
+        				console.error("BreweryDB error: ", data.errorMessage);
+        				res.json(data);
+        				return;
+        			} else if(data.data[0].style){
         				data.data.forEach(function(beer){
         					if(beer.style){
         						if(beer.style.name.includes(style) &&
@@ -177,20 +176,6 @@ router.get('/wishlist', auth.checkUser, function(req,res){
 		res.json(wishlist)
 	})
 })
-
-// router.get('/wishlist', auth.checkUser, function(req,res){
-// 	var username = req.query.username;
-// 	var wishlist;
-
-// 	db.User.findOne({username:username},function(err,user){
-// 		if(err){
-// 			console.log('error finding user in DB');
-// 			res.send(err);
-// 		}
-// 		wishlist = user.wishList;
-// 		res.json(wishlist)
-// 	})
-// })
 
 router.post('/wishlist', auth.checkUser, function(req,res){
 	var username = req.body.username;
