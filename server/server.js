@@ -4,9 +4,9 @@ var routes = require('./routes');
 var mongoose = require('mongoose');
 var app = express();
 var db = require('./database');
-var request = require('request');
+var cors = require('cors');
 
-var Promise = require('bluebird');
+app.use(cors());
 
 app.use(function(req,res,next) {
   res.header('Access-Control-Allow-Origin', '*');
