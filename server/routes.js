@@ -65,19 +65,15 @@ router.post('/login',function(req, res, next) {
 	});  			
 });
 
-// router.get('/getbeerlabel', function(req,res){
-// 	var url = req.query.labelurl;
-// 	request.get(url, function(err, response, body) { 
-//         if(err){
-//             console.log(err);
-//         }
-//        	res.send(body);
-//     });
-// })
-
 router.get('/fetchbeers', function(req,res){
 	var username = req.query.username;
-	var style = req.query.style;
+	var style;
+	if(!req.query.style) {
+		style = "Ale";
+		console.log('req.query.style undefined!!!');
+	} else {
+		style = req.query.style;
+	}
 
 	var wishList = {};
 	var dislikes = {};
