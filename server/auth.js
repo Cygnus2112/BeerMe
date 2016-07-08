@@ -11,8 +11,12 @@ module.exports = {
     var decodedToken = jwt.decode(req.headers['x-access-token'], secret)
 
     if(decodedToken.scope === scope) {
-       //req.query.id = decodedToken.id;
-      req.query.username = decodedToken.username;
+      if(req.query) {
+        req.query.username = decodedToken.username;
+      } else {
+        req.body.username = decodedToken.username;
+      }
+      
       next();
     } else {
       res.sendStatus(500);

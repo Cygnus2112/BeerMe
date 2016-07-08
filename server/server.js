@@ -5,8 +5,7 @@ var mongoose = require('mongoose');
 var app = express();
 var db = require('./database');
 var cors = require('cors');
-
-app.use(cors());
+var timeout = require('connect-timeout');
 
 app.use(function(req,res,next) {
   res.header('Access-Control-Allow-Origin', '*');
@@ -17,11 +16,20 @@ app.use(function(req,res,next) {
   next();
 });
 
-var port = process.env.PORT || 8080;
+app.use(cors());
+
+var port = process.env.PORT || 8081;
 
 app.use(bodyParser.json());
 
 app.use('/', routes);
+
+function haltOnTimedout(req, res, next){
+  if (!req.timedout) next();
+}
+
+app.use(timeout(120000));
+app.use(haltOnTimedout);
 
 app.listen(port);
 
