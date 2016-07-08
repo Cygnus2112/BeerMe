@@ -4,6 +4,15 @@
 
 Swipe your way to craft-beer nirvana with BeerMe!, a fun way to expand your beer-drinking palette.
 
+####How It Works
+
+Log in, choose a style, and swipe through a continuously reloading assortment of beers chosen at random. 
+![swipe_views](assets/styles_swipe.png)
+
+Swipe right and the beer is added to your Wish List. Swipe left and you'll never see that beer again. (This might be tweaked in a future version. It seems a tad extreme.)
+
+![wishlist_views](assets/wishlist_detail.png)
+
 The BeerMe! tech stack includes the following languages and frameworks...
 
 ####Front End:
@@ -21,16 +30,6 @@ The BeerMe! tech stack includes the following languages and frameworks...
 * AWS Electric Beanstalk for hosting
 
 BeerMe! uses the amazing BreweryDB API for all of its beer data. 
-
-####How It Works
-
-Log in, choose a style, and swipe through a continuously reloading assortment of beers chosen at random. 
-
-![swipe_views](assets/styles_swipe.png)
-
-Swipe right and the beer is added to your Wish List. Swipe left and you'll never see that beer again. (This might be tweaked in a future version. It seems a tad extreme.)
-
-![wishlist_views](assets/wishlist_detail.png)
 
 ####TODO:
 
