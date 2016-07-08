@@ -7,7 +7,6 @@ Swipe your way to craft-beer nirvana with BeerMe!, a fun way to expand your beer
 ####How It Works
 
 Log in, choose a style, and swipe through a continuously reloading assortment of beers chosen at random. 
-
 ![swipe_views](assets/styles_swipe.png)
 
 Swipe right and the beer is added to your Wish List. Swipe left and you'll never see that beer again. (This might be tweaked in a future version. It seems a tad extreme.)
