@@ -20,7 +20,7 @@ db.User = mongoose.model('User', db.userSchema);
 
 db.User.find(function (err, users) {
   if (err) return console.error(err);
-  console.log(users);
+  //console.log(users);
 })
 
 module.exports = db;
