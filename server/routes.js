@@ -138,7 +138,10 @@ router.get('/fetchbeers', function(req,res){
 									beersFetched[beer.id] = {
 										"name": beer.name,
 										"label": beer.labels.medium,
-										"style": beer.style.name
+										"style": beer.style.name,
+										"icon": beer.labels.icon,
+										"descript": beer.description,
+										"abv": beer.abv
 									}
 								}
 							}
@@ -190,7 +193,10 @@ router.post('/wishlist', auth.checkUser, function(req,res){
 			user.wishList[beer.id] = {
 				"name": beer.name,
 				"style": beer.style,
-				"label": beer.labelUrl
+				"label": beer.labelUrl,
+				"icon": beer.labels.icon,
+				"descript": beer.description,
+				"abv": beer.abv
 			}
 			user.markModified('wishList');
 
@@ -202,7 +208,10 @@ router.post('/wishlist', auth.checkUser, function(req,res){
 			user.dislikes[beer.id] = {
 				"name": beer.name,
 				"style": beer.style,
-				"label": beer.labelUrl
+				"label": beer.labelUrl,
+				"icon": beer.labels.icon,
+				"descript": beer.description,
+				"abv": beer.abv
 			}
 			user.markModified('dislikes');
 		});		
@@ -242,7 +251,10 @@ router.put('/wishlist', auth.checkUser, function(req,res){
 			user.dislikes[addToDislikes.id] = {
 				"name": addToDislikes.name,
 				"style": addToDislikes.style,
-				"label": addToDislikes.labelUrl
+				"label": addToDislikes.labelUrl,
+				"icon": beer.labels.icon,
+				"descript": beer.description,
+				"abv": beer.abv
 			}
 			user.markModified('dislikes');
 		}	
