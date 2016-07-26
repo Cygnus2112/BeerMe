@@ -82,8 +82,8 @@ router.get('/fetchbeers', function(req,res){
 			console.log('error finding user in DB');
 			res.send(err);
 		}
-		wishList = {} || user.wishList;
-		dislikes = {} || req.query.dislikes;
+		wishList = user.wishList || {};
+		dislikes = req.query.dislikes || {};
 	})
 
 	// ------------------
@@ -194,9 +194,9 @@ router.post('/wishlist', auth.checkUser, function(req,res){
 				"name": beer.name,
 				"style": beer.style,
 				"label": beer.labelUrl,
-				"icon": beer.labels.icon,
-				"descript": beer.description,
-				"abv": beer.abv
+				"icon": beer.icon || "",
+				"descript": beer.description || "",
+				"abv": beer.abv || ""
 			}
 			user.markModified('wishList');
 
@@ -209,9 +209,9 @@ router.post('/wishlist', auth.checkUser, function(req,res){
 				"name": beer.name,
 				"style": beer.style,
 				"label": beer.labelUrl,
-				"icon": beer.labels.icon,
-				"descript": beer.description,
-				"abv": beer.abv
+				"icon": beer.icon || "",
+				"descript": beer.description || "",
+				"abv": beer.abv || ""
 			}
 			user.markModified('dislikes');
 		});		
@@ -252,9 +252,9 @@ router.put('/wishlist', auth.checkUser, function(req,res){
 				"name": addToDislikes.name,
 				"style": addToDislikes.style,
 				"label": addToDislikes.labelUrl,
-				"icon": beer.labels.icon,
-				"descript": beer.description,
-				"abv": beer.abv
+				"icon": addToDislikes.icon || "",
+				"descript": addToDislikes.descript || "",
+				"abv": addToDislikes.abv || ""
 			}
 			user.markModified('dislikes');
 		}	
