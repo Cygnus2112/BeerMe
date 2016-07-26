@@ -252,9 +252,9 @@ router.put('/wishlist', auth.checkUser, function(req,res){
 				"name": addToDislikes.name,
 				"style": addToDislikes.style,
 				"label": addToDislikes.labelUrl,
-				"icon": beer.icon || "",
-				"descript": beer.description || "",
-				"abv": beer.abv || ""
+				"icon": addToDislikes.icon || "",
+				"descript": addToDislikes.descript || "",
+				"abv": addToDislikes.abv || ""
 			}
 			user.markModified('dislikes');
 		}	
