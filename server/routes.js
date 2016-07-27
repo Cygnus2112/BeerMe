@@ -88,7 +88,7 @@ router.get('/fetchbeers', function(req,res){
 
 	// ------------------
 
-	var url = "http://api.brewerydb.com/v2/beers?key="+breweryKey+"&availableId=1&hasLabels=y&order=random&randomCount=10";
+	var url = "http://api.brewerydb.com/v2/beers?key="+breweryKey+"&availableId=1&hasLabels=y&order=random&randomCount=10&withBreweries=y";
 	
 	if(style === "Pilsner") {
 		style = "Pilsener";
@@ -141,7 +141,9 @@ router.get('/fetchbeers', function(req,res){
 										"style": beer.style.name,
 										"icon": beer.labels.icon,
 										"descript": beer.description,
-										"abv": beer.abv
+										"abv": beer.abv,
+										"brewery": beer.breweries[0].name,
+										"website": beer.breweries[0].website
 									}
 								}
 							}
@@ -195,8 +197,10 @@ router.post('/wishlist', auth.checkUser, function(req,res){
 				"style": beer.style,
 				"label": beer.labelUrl,
 				"icon": beer.icon || "",
-				"descript": beer.description || "",
-				"abv": beer.abv || ""
+				"descript": beer.descript || "",
+				"abv": beer.abv || "",
+				"brewery": beer.brewery || "",
+				"website": beer.website || ""
 			}
 			user.markModified('wishList');
 
@@ -210,8 +214,10 @@ router.post('/wishlist', auth.checkUser, function(req,res){
 				"style": beer.style,
 				"label": beer.labelUrl,
 				"icon": beer.icon || "",
-				"descript": beer.description || "",
-				"abv": beer.abv || ""
+				"descript": beer.descript || "",
+				"abv": beer.abv || "",
+				"brewery": beer.brewery || "",
+				"website": beer.website || ""
 			}
 			user.markModified('dislikes');
 		});		
@@ -254,7 +260,9 @@ router.put('/wishlist', auth.checkUser, function(req,res){
 				"label": addToDislikes.labelUrl,
 				"icon": addToDislikes.icon || "",
 				"descript": addToDislikes.descript || "",
-				"abv": addToDislikes.abv || ""
+				"abv": addToDislikes.abv || "",
+				"brewery": addToDislikes.brewery || "",
+				"website": addToDislikes.website || ""
 			}
 			user.markModified('dislikes');
 		}	
