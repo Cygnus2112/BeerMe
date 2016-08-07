@@ -173,7 +173,7 @@ router.get('/wishlist', auth.checkUser, function(req,res){
 			console.log('error finding user in DB');
 			res.send(err);
 		}
-		wishlist = user.wishList;
+		wishlist = user.wishList || {};
 		res.json(wishlist)
 	})
 })
