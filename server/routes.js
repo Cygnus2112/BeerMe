@@ -77,14 +77,18 @@ router.get('/fetchbeers', function(req,res){
 
 	var wishList = {};
 	var dislikes = {};
-	db.User.findOne({username:username},function(err,user){
+
+	if(username){
+	  db.User.findOne({username:username},function(err,user){
 		if(err){
 			console.log('error finding user in DB');
 			res.send(err);
 		}
 		wishList = user.wishList || {};
-		dislikes = req.query.dislikes || {};
-	})
+		dislikes = user.dislikes || {};
+	  })
+	}
+
 
 	// ------------------
 
