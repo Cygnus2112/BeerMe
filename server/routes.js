@@ -4,6 +4,7 @@ var db = require('./database');
 var request = require('request');
 var Promise = require('bluebird');
 var bcrypt = require('bcrypt');
+var fs = require('fs')
 var auth = require('./auth');
 var breweryKey = require('./utilities').breweryKey;
 
@@ -65,6 +66,50 @@ router.post('/login',function(req, res, next) {
 	});  			
 });
 
+var downloadAllBeers = function() {
+    var now = Date.now();
+    var beerArray = []
+    var page = 1;
+    var url = "http://api.brewerydb.com/v2/beers?key="+breweryKey+"&p="+page+"&availableId=1&hasLabels=y&withBreweries=y";
+    var allBeers = fs.createWriteStream('./server/beersOutput.js')
+	
+    var promiseWhile = function(condition, action) {
+    	var resolver = Promise.defer();
+    	var loop = function() {
+        	if (!condition()) return resolver.resolve();
+        	return Promise.cast(action())
+            	.then(loop)
+            	.catch(resolver.reject);
+    	};
+    	process.nextTick(loop);
+    	return resolver.promise;
+	};
+
+	promiseWhile(function() {
+    		return page < 105;
+		}, function() {    			
+			return new Promise(function(resolve, reject) {    
+            url = "http://api.brewerydb.com/v2/beers?key="+'336ad89cea47e683efa68ee5c51f7449'+"&p="+(page++)+"&availableId=1&hasLabels=y&withBreweries=y"; 		
+        		request.get(url, function(err, response, body) { 
+        			if(err){
+            			console.log("error in downloadAllBeers: ", err);
+        			}
+        			console.log("---------------------");       
+                    beerArray.push(body); 
+        			resolve();      
+				});
+    		});
+		}).then(function() {
+            allBeers.write(JSON.stringify(beerArray))
+			allBeers.end();
+
+            console.log('Done. Time to complete BreweryDBdownload: ');
+            console.log((Date.now() - now)/1000)
+		});  
+}
+
+downloadAllBeers();
+
 router.get('/fetchbeers', function(req,res){
 	var username = req.query.username;
 	var style;
@@ -89,83 +134,175 @@ router.get('/fetchbeers', function(req,res){
 	  })
 	}
 
-
-	// ------------------
-
-	var url = "http://api.brewerydb.com/v2/beers?key="+breweryKey+"&availableId=1&hasLabels=y&order=random&randomCount=10&withBreweries=y";
-	
 	if(style === "Pilsner") {
 		style = "Pilsener";
 	}
 
 	// do a while search with random setting and keep checking if we don't find beers w/that style
 
-	var foundBeers = 0;
-	var beersFetched = {};
+	// var foundBeers = 0;
+	// var beersFetched = {};
 
-	var promiseWhile = function(condition, action) {
-    	var resolver = Promise.defer();
-    	var loop = function() {
-        	if (!condition()) return resolver.resolve();
-        	return Promise.cast(action())
-            	.then(loop)
-            	.catch(resolver.reject);
-    	};
-    	process.nextTick(loop);
-    	return resolver.promise;
-	};
+	function shuffle (array) {
+  		var i = 0
+    		, j = 0
+    		, temp = null
 
-	promiseWhile(function() {
-    		return foundBeers < 2;
-		}, function() {    			
-			return new Promise(function(resolve, reject) {     		
-        		request.get(url, function(err, response, body) { 
-        			if(err){
-            			console.log("error in fetchbeers: ", err);
-        			}
-        			console.log("---------------------");       
+ 		 for (i = array.length - 1; i > 0; i -= 1) {
+   			j = Math.floor(Math.random() * (i + 1))
+   			 	temp = array[i]
+    			array[i] = array[j]
+    			array[j] = temp
+  		}
+	}
 
-       // TODO separate out into sep file:
-        			var data = JSON.parse(body);
+	var cb = (err, data) => {
+		var beers = [];
+		var now = Date.now();
+		var a = JSON.parse(data)
+		//var a = JSON.parse(data)
+		for(var i = 0; i < a.length; i++) {
+			var b = JSON.parse(a[i])
+			var data = b['data'];
+			for(var j = 0; j < data.length; j++) {
+				if(data[j]['style']){
+					if(data[j].style.name.includes(style)){
+						beers.push(data[j]);
+					}
+				}	
+			}	
+		}
+		shuffle(beers);
+		var count = 0;
+		var chosen = {};
+		var numsUsed = {};
+		console.log('beers.length');
+		console.log(beers.length);
+		while(count < 20){
+			var num = (Math.floor(Math.random() * (beers.length - 1)))
+			if(!(num in numsUsed) && !(beers[num]['id'] in wishList) && !(beers[num]['id'] in dislikes)) {
+				chosen[beers[num]['id']] = {
+					'name': beers[num]['name'], 
+					"descript": beers[num].description,
+					"label": beers[num].labels.medium,
+					"style": beers[num].style.name,
+					"icon": beers[num].labels.icon,
+					"descript": beers[num].description,
+					"abv": beers[num].abv,
+					"brewery": beers[num].breweries[0].name,
+					"website": beers[num].breweries[0].website
+				};
+				count++;
+			}
+			numsUsed[num] = num
+		}
+		console.log(chosen);
+		res.json(chosen);
+		console.log('Done. Time to complete data parsing: ');
+        console.log((Date.now() - now)/1000)
+	}
 
-        			if(data.errorMessage) {
-        				console.error("BreweryDB error: ", data.errorMessage);
-        				res.json(data);
-        				return;
-        			} else if(data.data[0].style){
-        				data.data.forEach(function(beer){
-        					if(beer.style){
-        						if(beer.style.name.includes(style) &&
-        							!(beer.id in wishList) &&
-        							!(beer.id in dislikes)){
-									foundBeers++;
-									beersFetched[beer.id] = {
-										"name": beer.name,
-										"label": beer.labels.medium,
-										"style": beer.style.name,
-										"icon": beer.labels.icon,
-										"descript": beer.description,
-										"abv": beer.abv,
-										"brewery": beer.breweries[0].name,
-										"website": beer.breweries[0].website
-									}
-								}
-							}
-        				})
-    				} 
-
-        			console.log("---------------------");   
-        			if(foundBeers >= 2){
-        				console.log(beersFetched);
-        				res.json(beersFetched); 
-        			}
-        			resolve();      
-				});
-    		});
-		}).then(function() {
-    		console.log("Done");
-		});  
+	fs.readFile('./server/beersOutput.js', 'utf8', cb) 
 })
+
+// router.get('/fetchbeers', function(req,res){
+// 	var username = req.query.username;
+// 	var style;
+// 	if(!req.query.style) {
+// 		style = "Ale";
+// 		console.log('req.query.style undefined!!!');
+// 	} else {
+// 		style = req.query.style;
+// 	}
+
+// 	var wishList = {};
+// 	var dislikes = {};
+
+// 	if(username){
+// 	  db.User.findOne({username:username},function(err,user){
+// 		if(err){
+// 			console.log('error finding user in DB');
+// 			res.send(err);
+// 		}
+// 		wishList = user.wishList || {};
+// 		dislikes = user.dislikes || {};
+// 	  })
+// 	}
+// 	// ------------------
+// 	var url = "http://api.brewerydb.com/v2/beers?key="+breweryKey+"&availableId=1&hasLabels=y&order=random&randomCount=10&withBreweries=y";
+	
+// 	if(style === "Pilsner") {
+// 		style = "Pilsener";
+// 	}
+
+// 	// do a while search with random setting and keep checking if we don't find beers w/that style
+
+// 	var foundBeers = 0;
+// 	var beersFetched = {};
+
+// 	var promiseWhile = function(condition, action) {
+//     	var resolver = Promise.defer();
+//     	var loop = function() {
+//         	if (!condition()) return resolver.resolve();
+//         	return Promise.cast(action())
+//             	.then(loop)
+//             	.catch(resolver.reject);
+//     	};
+//     	process.nextTick(loop);
+//     	return resolver.promise;
+// 	};
+
+// 	promiseWhile(function() {
+//     		return foundBeers < 2;
+// 		}, function() {    			
+// 			return new Promise(function(resolve, reject) {     		
+//         		request.get(url, function(err, response, body) { 
+//         			if(err){
+//             			console.log("error in fetchbeers: ", err);
+//         			}
+//         			console.log("---------------------");       
+
+//        // TODO separate out into sep file:
+//         			var data = JSON.parse(body);
+
+//         			if(data.errorMessage) {
+//         				console.error("BreweryDB error: ", data.errorMessage);
+//         				res.json(data);
+//         				return;
+//         			} else if(data.data[0].style){
+//         				data.data.forEach(function(beer){
+//         					if(beer.style){
+//         						if(beer.style.name.includes(style) &&
+//         							!(beer.id in wishList) &&
+//         							!(beer.id in dislikes)){
+// 									foundBeers++;
+// 									beersFetched[beer.id] = {
+// 										"name": beer.name,
+// 										"label": beer.labels.medium,
+// 										"style": beer.style.name,
+// 										"icon": beer.labels.icon,
+// 										"descript": beer.description,
+// 										"abv": beer.abv,
+// 										"brewery": beer.breweries[0].name,
+// 										"website": beer.breweries[0].website
+// 									}
+// 								}
+// 							}
+//         				})
+//     				} 
+
+//         			console.log("---------------------");   
+//         			if(foundBeers >= 2){
+//         				console.log(beersFetched);
+//         				res.json(beersFetched); 
+//         			}
+//         			resolve();      
+// 				});
+//     		});
+// 		}).then(function() {
+//     		console.log("Done");
+// 		});  
+// })
 
 
 router.get('/wishlist', auth.checkUser, function(req,res){
